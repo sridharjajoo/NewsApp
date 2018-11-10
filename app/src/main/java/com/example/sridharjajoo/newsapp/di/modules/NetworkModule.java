@@ -1,5 +1,6 @@
 package com.example.sridharjajoo.newsapp.di.modules;
 
+import com.example.sridharjajoo.newsapp.data.Headline.HeadlineResponse;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -30,10 +31,10 @@ public class NetworkModule {
                  .setSerializationInclusion(JsonInclude.Include.NON_ABSENT);
     }
 
-//    @Provides
-//    Class[] providesMappedClasses() {
-//        return new Class[]{ SearchResponse.class};
-//    }
+    @Provides
+    Class[] providesMappedClasses() {
+        return new Class[]{ HeadlineResponse.class};
+    }
 
     @Provides
     @Singleton
@@ -70,7 +71,7 @@ public class NetworkModule {
                 .client(client)
                 .addConverterFactory(factory)
                 .addCallAdapterFactory(callAdapterFactory)
-                .baseUrl("https://newsapi.org/v2/")
+                .baseUrl("https://newsapi.org/v2")
                 .build();
     }
 }

@@ -9,11 +9,13 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.sridharjajoo.newsapp.core.FavouriteFragment;
 import com.example.sridharjajoo.newsapp.core.HeadlineFragment;
 import com.example.sridharjajoo.newsapp.core.SearchFragment;
+import com.example.sridharjajoo.newsapp.data.Headline.HeadlineService;
 
 import javax.inject.Inject;
 
@@ -43,30 +45,27 @@ public class NewsMainActivity extends AppCompatActivity implements HasSupportFra
     }
 
     private void showNavigation() {
-        navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.navigation_headline:
-                        HeadlineFragment navigationFragment = new HeadlineFragment();
-                        actionBar.setTitle("Headlines");
-                        loadFragment(navigationFragment);
-                        return true;
+        navigationView.setOnNavigationItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.navigation_headline:
+                    HeadlineFragment navigationFragment = new HeadlineFragment();
+                    actionBar.setTitle("Headlines");
+                    loadFragment(navigationFragment);
+                    return true;
 
-                    case R.id.navigation_search:
-                        SearchFragment searchFragment = new SearchFragment();
-                        actionBar.setTitle("Search");
-                        loadFragment(searchFragment);
-                        return true;
+                case R.id.navigation_search:
+                    SearchFragment searchFragment = new SearchFragment();
+                    actionBar.setTitle("Search");
+                    loadFragment(searchFragment);
+                    return true;
 
-                    case R.id.navigation_favourite:
-                        FavouriteFragment favouriteFragment = new FavouriteFragment();
-                        actionBar.setTitle("Favourite");
-                        loadFragment(favouriteFragment);
-                        return true;
-                }
-                return true;
+                case R.id.navigation_favourite:
+                    FavouriteFragment favouriteFragment = new FavouriteFragment();
+                    actionBar.setTitle("Favourite");
+                    loadFragment(favouriteFragment);
+                    return true;
             }
+            return true;
         });
     }
 
