@@ -11,10 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.sridharjajoo.newsapp.data.Headline.HeadlineService;
+import com.example.sridharjajoo.newsapp.di.Injectable;
 
 import javax.inject.Inject;
 
-public class HeadlineFragment extends Fragment {
+public class HeadlineFragment extends Fragment implements Injectable {
 
     @Inject
     HeadlineService headlineService;
@@ -29,11 +30,12 @@ public class HeadlineFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        Log.i("HeadlineFragment.class", "onCreateView: " + headlineService);
         headlineService.getHeadline("in")
                 .doOnSubscribe(disposable -> {})
                 .doFinally(() -> {})
                 .subscribe(status -> {
-            Log.i("HeadlineFragment.class", "onCreateView: " + headlineService);
-        });
+                    Log.i("HeadlineFragment.class", "Ans: " + status.status + " " + status.totalResults + " " + status.articles.get(0).description);
+                });
     }
 }

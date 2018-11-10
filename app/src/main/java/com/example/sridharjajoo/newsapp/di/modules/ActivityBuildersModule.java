@@ -11,15 +11,15 @@ import dagger.android.ContributesAndroidInjector;
 @Module
 public abstract class ActivityBuildersModule {
 
-//    @ContributesAndroidInjector
-//    abstract NewsMainActivity contributesNewsMainActivity();
-//
-//    @ContributesAndroidInjector
-//    abstract FavouriteFragment contributesFavouriteFragment();
-//
-//    @ContributesAndroidInjector
-//    abstract HeadlineFragment contributesHeadlineFragment();
-//
-//    @ContributesAndroidInjector
-//    abstract SearchFragment contributesSearchFragment();
+    @ContributesAndroidInjector
+    abstract NewsMainActivity contributesNewsMainActivity();
+
+    @ContributesAndroidInjector
+    abstract FavouriteFragment contributesFavouriteFragment();
+
+    @ContributesAndroidInjector
+    abstract HeadlineFragment contributesHeadlineFragment();
+
+    @ContributesAndroidInjector
+    abstract SearchFragment contributesSearchFragment();
 }

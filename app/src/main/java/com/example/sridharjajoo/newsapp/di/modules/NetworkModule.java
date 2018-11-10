@@ -71,7 +71,7 @@ public class NetworkModule {
                 .client(client)
                 .addConverterFactory(factory)
                 .addCallAdapterFactory(callAdapterFactory)
-                .baseUrl("https://newsapi.org/v2")
+                .baseUrl("https://newsapi.org/v2/")
                 .build();
     }
 }

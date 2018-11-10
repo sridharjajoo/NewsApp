@@ -18,7 +18,7 @@ public class HeadlineServiceImpl implements HeadlineService {
 
     @Override
     public Observable<HeadlineResponse> getHeadline(String headlineRequest) {
-        return headlineApi.getHeadlines(headlineRequest, "aaefc3faa210424e9978fa75586d9580")
+        return headlineApi.getHeadlines()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

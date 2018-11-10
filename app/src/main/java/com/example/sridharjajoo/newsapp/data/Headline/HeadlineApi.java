@@ -7,7 +7,6 @@ import retrofit2.http.Query;
 
 public interface HeadlineApi {
 
-    @GET("/top-headlines")
-    Observable<HeadlineResponse> getHeadlines(@Query("country") String countryCode,
-                                              @Query("apiKey") String key);
+    @GET("top-headlines?country=in&apiKey=aaefc3faa210424e9978fa75586d9580")
+    Observable<HeadlineResponse> getHeadlines();
 }
