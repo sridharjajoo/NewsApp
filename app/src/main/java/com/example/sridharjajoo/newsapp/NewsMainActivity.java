@@ -1,21 +1,15 @@
 package com.example.sridharjajoo.newsapp;
 
-import android.support.annotation.NonNull;
-import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.MenuItem;
 
 import com.example.sridharjajoo.newsapp.core.FavouriteFragment;
-import com.example.sridharjajoo.newsapp.core.HeadlineFragment;
-import com.example.sridharjajoo.newsapp.core.SearchFragment;
-import com.example.sridharjajoo.newsapp.data.Headline.HeadlineService;
+import com.example.sridharjajoo.newsapp.core.Headline.HeadlineFragment;
+import com.example.sridharjajoo.newsapp.core.Search.SearchFragment;
 
 import javax.inject.Inject;
 

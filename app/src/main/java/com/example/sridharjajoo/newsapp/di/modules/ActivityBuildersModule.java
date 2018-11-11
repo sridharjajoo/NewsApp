@@ -2,8 +2,8 @@ package com.example.sridharjajoo.newsapp.di.modules;
 
 import com.example.sridharjajoo.newsapp.NewsMainActivity;
 import com.example.sridharjajoo.newsapp.core.FavouriteFragment;
-import com.example.sridharjajoo.newsapp.core.HeadlineFragment;
-import com.example.sridharjajoo.newsapp.core.SearchFragment;
+import com.example.sridharjajoo.newsapp.core.Headline.HeadlineFragment;
+import com.example.sridharjajoo.newsapp.core.Search.SearchFragment;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;

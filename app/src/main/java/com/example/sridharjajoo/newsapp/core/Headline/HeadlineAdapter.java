@@ -1,4 +1,4 @@
-package com.example.sridharjajoo.newsapp.core;
+package com.example.sridharjajoo.newsapp.core.Headline;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
@@ -30,6 +31,11 @@ import com.example.sridharjajoo.newsapp.R;
 import com.example.sridharjajoo.newsapp.data.Headline.Articles;
 import com.flaviofaria.kenburnsview.RandomTransitionGenerator;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
@@ -104,6 +110,15 @@ public class HeadlineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private void configureViewHolder(HeadlineViewHolder viewHolder, Articles currentItem) {
         viewHolder.description.setText(currentItem.title);
+        try {
+            DateFormat targetFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            Date sd = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").parse(currentItem.publishedAt);
+            String formattedDate = targetFormat.format(sd);
+            viewHolder.newsTime.setText(formattedDate);
+            Log.i("Adapter", "configureViewHolder: " + formattedDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         viewHolder.cardView.setElevation(0);
         Glide.with(context)
                 .asBitmap()
@@ -124,7 +139,7 @@ public class HeadlineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 }).submit();
     }
 
-    protected void setArticlesList(final List<Articles> newList) {
+    public void setArticlesList(final List<Articles> newList) {
         if (articles == null) {
             articles = newList;
             notifyItemRangeInserted(0, newList.size());

@@ -1,4 +1,4 @@
-package com.example.sridharjajoo.newsapp.core;
+package com.example.sridharjajoo.newsapp.core.Headline;
 
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
