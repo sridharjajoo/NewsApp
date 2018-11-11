@@ -42,6 +42,13 @@ public class NewsMainActivity extends AppCompatActivity implements HasSupportFra
         ButterKnife.bind(this);
         actionBar = getSupportActionBar();
         showNavigation();
+        showHeadlines();
+    }
+
+    private void showHeadlines() {
+        HeadlineFragment navigationFragment = new HeadlineFragment();
+        actionBar.setTitle("Headlines");
+        loadFragment(navigationFragment);
     }
 
     private void showNavigation() {
@@ -64,8 +71,12 @@ public class NewsMainActivity extends AppCompatActivity implements HasSupportFra
                     actionBar.setTitle("Favourite");
                     loadFragment(favouriteFragment);
                     return true;
+                default:
+                    HeadlineFragment navigationFragmentDefault = new HeadlineFragment();
+                    actionBar.setTitle("Headlines");
+                    loadFragment(navigationFragmentDefault);
+                    return true;
             }
-            return true;
         });
     }
 

@@ -8,7 +8,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@JsonNaming(PropertyNamingStrategy.KebabCaseStrategy.class)
 public class Articles {
     public String description;
+    public String urlToImage;
+    public String url;
+    public String title;
 }

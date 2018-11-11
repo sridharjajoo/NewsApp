@@ -5,37 +5,74 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
+import com.example.sridharjajoo.newsapp.R;
+import com.example.sridharjajoo.newsapp.data.Headline.Articles;
 import com.example.sridharjajoo.newsapp.data.Headline.HeadlineService;
 import com.example.sridharjajoo.newsapp.di.Injectable;
+import com.flaviofaria.kenburnsview.KenBurnsView;
+
+import java.util.List;
 
 import javax.inject.Inject;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class HeadlineFragment extends Fragment implements Injectable {
 
     @Inject
     HeadlineService headlineService;
 
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
+
+    @BindView(R.id.recycler_headline)
+    RecyclerView recyclerHeadline;
+
+    @BindView(R.id.kenburns)
+    KenBurnsView kenburns;
+
+    private List<Articles> articlesList;
+    private HeadlineAdapter headlineAdapter;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        View view = inflater.inflate(R.layout.fragment_headline, container, false);
+        ButterKnife.bind(this, view);
+        return view;
     }
 
     @SuppressLint("CheckResult")
     @Override
     public void onStart() {
         super.onStart();
-        Log.i("HeadlineFragment.class", "onCreateView: " + headlineService);
         headlineService.getHeadline("in")
-                .doOnSubscribe(disposable -> {})
-                .doFinally(() -> {})
+                .doOnSubscribe(disposable -> progressBar.setVisibility(View.VISIBLE))
+                .doFinally(() -> progressBar.setVisibility(View.GONE))
                 .subscribe(status -> {
-                    Log.i("HeadlineFragment.class", "Ans: " + status.status + " " + status.totalResults + " " + status.articles.get(0).description);
+                    this.articlesList = status.articles;
+                    setRecyclerView(articlesList);
                 });
+    }
+
+    private void setRecyclerView(List<Articles> articlesList) {
+        recyclerHeadline.setLayoutManager(new LinearLayoutManager(getContext()));
+        headlineAdapter = new HeadlineAdapter(articlesList, getActivity());
+        recyclerHeadline.setAdapter(headlineAdapter);
+        loadArticles(articlesList);
+    }
+
+    private void loadArticles(List<Articles> articlesList) {
+        headlineAdapter.setArticlesList(articlesList);
     }
 }
