@@ -14,4 +14,5 @@ public abstract class ModelModule {
     @Binds
     @Singleton
     abstract HeadlineService bindsHeadlineServiceModule(HeadlineServiceImpl headlineService);
+
 }

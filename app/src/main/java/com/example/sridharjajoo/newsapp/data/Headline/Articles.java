@@ -14,4 +14,5 @@ public class Articles {
     public String url;
     public String title;
     public String publishedAt;
+    public Source source;
 }

@@ -39,6 +39,9 @@ public class HeadlineFragment extends Fragment implements Injectable {
     @Inject
     HeadlineService headlineService;
 
+    @Inject
+    IHeadlineDetail iHeadlineDetail;
+
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
 
@@ -79,6 +82,7 @@ public class HeadlineFragment extends Fragment implements Injectable {
         headlineAdapter = new HeadlineAdapter(articlesList, getActivity());
         recyclerHeadline.setAdapter(headlineAdapter);
         loadArticles(articlesList);
+//        Log.i("HeadlienFragment.class", "setRecyclerView: " + iHeadlineDetail);
         DividerItemDecoration itemDecorator = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
         itemDecorator.setDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.divider));
         recyclerHeadline.addItemDecoration(itemDecorator);

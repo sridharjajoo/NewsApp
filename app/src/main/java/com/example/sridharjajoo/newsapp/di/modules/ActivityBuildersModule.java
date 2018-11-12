@@ -2,6 +2,7 @@ package com.example.sridharjajoo.newsapp.di.modules;
 
 import com.example.sridharjajoo.newsapp.NewsMainActivity;
 import com.example.sridharjajoo.newsapp.core.FavouriteFragment;
+import com.example.sridharjajoo.newsapp.core.Headline.HeadlineDetail;
 import com.example.sridharjajoo.newsapp.core.Headline.HeadlineFragment;
 import com.example.sridharjajoo.newsapp.core.Search.SearchFragment;
 
@@ -22,4 +23,7 @@ public abstract class ActivityBuildersModule {
 
     @ContributesAndroidInjector
     abstract SearchFragment contributesSearchFragment();
+
+    @ContributesAndroidInjector
+    abstract HeadlineDetail contributesHeadlineDetail();
 }

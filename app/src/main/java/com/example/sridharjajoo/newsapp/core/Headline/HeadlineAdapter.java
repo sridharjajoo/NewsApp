@@ -3,52 +3,43 @@ package com.example.sridharjajoo.newsapp.core.Headline;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Interpolator;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
-import com.bumptech.glide.request.transition.Transition;
 import com.example.sridharjajoo.newsapp.R;
+import com.example.sridharjajoo.newsapp.Utils.Utils;
 import com.example.sridharjajoo.newsapp.data.Headline.Articles;
-import com.flaviofaria.kenburnsview.RandomTransitionGenerator;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
-public class HeadlineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class HeadlineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
 
+//    private final IHeadlineDetailFragment detailFragment;
     private final List<Articles> articlesList;
+    private final Context context;
     private List<Articles> articles;
-    private Context context;
 
     public HeadlineAdapter(List<Articles> articlesList, FragmentActivity activity) {
         this.articlesList = articlesList;
         this.context = activity;
+//        this.detailFragment = detailFragment;
     }
 
     @NonNull
@@ -109,17 +100,15 @@ public class HeadlineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     private void configureViewHolder(HeadlineViewHolder viewHolder, Articles currentItem) {
+        viewHolder.newsImage.setOnClickListener(view -> {
+//            viewHolder.handleClickAction(view, currentItem.description, currentItem.urlToImage);
+        });
+
         viewHolder.description.setText(currentItem.title);
-        try {
-            DateFormat targetFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-            Date sd = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").parse(currentItem.publishedAt);
-            String formattedDate = targetFormat.format(sd);
-            viewHolder.newsTime.setText(formattedDate);
-            Log.i("Adapter", "configureViewHolder: " + formattedDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        viewHolder.newsSource.setText(currentItem.source.name);
+        viewHolder.newsTime.setText(Utils.formattedDate(currentItem.publishedAt));
         viewHolder.cardView.setElevation(0);
+
         Glide.with(context)
                 .asBitmap()
                 .load(currentItem.urlToImage)
