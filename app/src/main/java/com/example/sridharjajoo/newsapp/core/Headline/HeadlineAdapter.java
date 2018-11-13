@@ -31,7 +31,6 @@ import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class HeadlineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
 
-//    private final IHeadlineDetailFragment detailFragment;
     private final List<Articles> articlesList;
     private final Context context;
     private List<Articles> articles;
@@ -39,7 +38,6 @@ public class HeadlineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public HeadlineAdapter(List<Articles> articlesList, FragmentActivity activity) {
         this.articlesList = articlesList;
         this.context = activity;
-//        this.detailFragment = detailFragment;
     }
 
     @NonNull
@@ -101,7 +99,6 @@ public class HeadlineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private void configureViewHolder(HeadlineViewHolder viewHolder, Articles currentItem) {
         viewHolder.newsImage.setOnClickListener(view -> {
-//            viewHolder.handleClickAction(view, currentItem.description, currentItem.urlToImage);
         });
 
         viewHolder.description.setText(currentItem.title);

@@ -3,4 +3,6 @@
     <string name="headlines">Headlines</string>
     <string name="search">Search</string>
     <string name="favourite">Favourite</string>
+    <string name="published_at">Published At:</string>
+    <string name="source">Source</string>
 </resources>
