@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ public class HeadlineViewHolder extends RecyclerView.ViewHolder {
     public CardView cardView;
     public TextView newsTime;
     public TextView newsSource;
+    public CheckBox favouriteCheckbox;
 
     public HeadlineViewHolder(View itemView) {
         super(itemView);
@@ -27,6 +29,7 @@ public class HeadlineViewHolder extends RecyclerView.ViewHolder {
         cardView = (CardView) itemView.findViewById(R.id.item_headline_card);
         newsTime = (TextView) itemView.findViewById(R.id.news_time);
         newsSource = (TextView) itemView.findViewById(R.id.news_source);
+        favouriteCheckbox = (CheckBox) itemView.findViewById(R.id.favourite_icon);
     }
 
     public void handleClickAction(View view, String description, String urlToImage) {

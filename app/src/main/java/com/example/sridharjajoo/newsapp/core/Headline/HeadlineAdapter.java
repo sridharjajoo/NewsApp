@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,11 +22,11 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.example.sridharjajoo.newsapp.R;
 import com.example.sridharjajoo.newsapp.Utils.Utils;
+import com.example.sridharjajoo.newsapp.data.AppDatabase;
+import com.example.sridharjajoo.newsapp.data.Favourite.Favourite;
 import com.example.sridharjajoo.newsapp.data.Headline.Articles;
 
 import java.util.List;
-
-import javax.inject.Inject;
 
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
@@ -34,10 +35,12 @@ public class HeadlineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private final List<Articles> articlesList;
     private final Context context;
     private List<Articles> articles;
+    private final AppDatabase db;
 
-    public HeadlineAdapter(List<Articles> articlesList, FragmentActivity activity) {
+    public HeadlineAdapter(List<Articles> articlesList, FragmentActivity activity, AppDatabase db) {
         this.articlesList = articlesList;
         this.context = activity;
+        this.db = db;
     }
 
     @NonNull
@@ -100,7 +103,12 @@ public class HeadlineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private void configureViewHolder(HeadlineViewHolder viewHolder, Articles currentItem) {
         viewHolder.newsImage.setOnClickListener(view -> {
         });
-
+        Favourite favourite = new Favourite();
+        favourite.articles = currentItem;
+        viewHolder.favouriteCheckbox.setOnCheckedChangeListener((compoundButton, isChecked) -> {
+            if (isChecked)
+                db.favoriteDao().insertFavourite(favourite);
+        });
         viewHolder.description.setText(currentItem.title);
         viewHolder.newsSource.setText(currentItem.source.name);
         viewHolder.newsTime.setText(Utils.formattedDate(currentItem.publishedAt));

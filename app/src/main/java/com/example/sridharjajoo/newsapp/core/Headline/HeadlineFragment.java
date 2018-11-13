@@ -22,6 +22,7 @@ import com.bumptech.glide.Glide;
 import com.example.sridharjajoo.newsapp.R;
 import com.example.sridharjajoo.newsapp.Utils.Utils;
 import com.example.sridharjajoo.newsapp.data.AppDatabase;
+import com.example.sridharjajoo.newsapp.data.Favourite.Favourite;
 import com.example.sridharjajoo.newsapp.data.Headline.Articles;
 import com.example.sridharjajoo.newsapp.data.Headline.HeadlineService;
 import com.example.sridharjajoo.newsapp.di.Injectable;
@@ -53,6 +54,7 @@ public class HeadlineFragment extends Fragment implements Injectable {
     private List<Articles> articlesList;
     private HeadlineAdapter headlineAdapter;
     private View view;
+    private AppDatabase db;
 
     @Nullable
     @Override
@@ -66,7 +68,7 @@ public class HeadlineFragment extends Fragment implements Injectable {
     @Override
     public void onStart() {
         super.onStart();
-        final AppDatabase db = AppDatabase.getAppDatabase(getActivity());
+        db = AppDatabase.getAppDatabase(getActivity());
         if (db.newsDao().newsArticles().isEmpty()) {
             headlineService.getHeadline("in")
                     .doOnSubscribe(disposable -> progressBar.setVisibility(View.VISIBLE))
@@ -86,17 +88,18 @@ public class HeadlineFragment extends Fragment implements Injectable {
     }
 
     private void addArticlesToDb(List<Articles> articles) {
-        final AppDatabase db = AppDatabase.getAppDatabase(getActivity());
+        db = AppDatabase.getAppDatabase(getActivity());
         for (int i = 0 ;i < articles.size(); i++) {
             Articles article = articles.get(i);
+            Favourite favourite = new Favourite();
+            favourite.articles = article;
             db.newsDao().insertAt(article);
-            Log.i("HeadlineFragment.class", "addArticlesToDb: " + db.newsDao().newsArticles().get(i) + "\n");
         }
     }
 
     private void setRecyclerView(List<Articles> articlesList) {
         recyclerHeadline.setLayoutManager(new LinearLayoutManager(getContext()));
-        headlineAdapter = new HeadlineAdapter(articlesList, getActivity());
+        headlineAdapter = new HeadlineAdapter(articlesList, getActivity(), db);
         recyclerHeadline.setAdapter(headlineAdapter);
         loadArticles(articlesList);
         DividerItemDecoration itemDecorator = new DividerItemDecoration(Objects.requireNonNull(getContext()), DividerItemDecoration.VERTICAL);
@@ -111,5 +114,11 @@ public class HeadlineFragment extends Fragment implements Injectable {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        db.newsDao().deleteTable();
     }
 }

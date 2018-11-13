@@ -21,7 +21,7 @@ import android.widget.SearchView;
 import com.example.sridharjajoo.newsapp.R;
 import com.example.sridharjajoo.newsapp.Utils.Utils;
 import com.example.sridharjajoo.newsapp.core.Headline.HeadlineAdapter;
-import com.example.sridharjajoo.newsapp.core.Headline.IHeadlineDetail;
+import com.example.sridharjajoo.newsapp.data.AppDatabase;
 import com.example.sridharjajoo.newsapp.data.Headline.Articles;
 import com.example.sridharjajoo.newsapp.data.Headline.HeadlineService;
 import com.example.sridharjajoo.newsapp.di.Injectable;
@@ -51,6 +51,7 @@ public class SearchFragment extends Fragment implements Injectable {
     private List<Articles> articlesList;
     private HeadlineAdapter headlineAdapter;
     private View view;
+    private AppDatabase db;
 
     @Nullable
     @Override
@@ -64,7 +65,7 @@ public class SearchFragment extends Fragment implements Injectable {
 
     private void setRecyclerView(List<Articles> articlesList) {
         customSearchRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
-        headlineAdapter = new HeadlineAdapter(articlesList, getActivity());
+        headlineAdapter = new HeadlineAdapter(articlesList, getActivity(), db);
         customSearchRecycler.setAdapter(headlineAdapter);
         loadArticles(articlesList);
         DividerItemDecoration itemDecorator = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);

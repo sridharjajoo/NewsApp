@@ -12,6 +12,9 @@ public interface NewsDao {
     @Query("SELECT * FROM articles")
     List<Articles> newsArticles();
 
+    @Query("DELETE FROM articles")
+    void deleteTable();
+
     @Insert
     void insertAt(Articles... articles);
 }
