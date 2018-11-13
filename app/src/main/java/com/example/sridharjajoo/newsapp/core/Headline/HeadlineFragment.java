@@ -21,12 +21,14 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.sridharjajoo.newsapp.R;
 import com.example.sridharjajoo.newsapp.Utils.Utils;
+import com.example.sridharjajoo.newsapp.data.AppDatabase;
 import com.example.sridharjajoo.newsapp.data.Headline.Articles;
 import com.example.sridharjajoo.newsapp.data.Headline.HeadlineService;
 import com.example.sridharjajoo.newsapp.di.Injectable;
 import com.flaviofaria.kenburnsview.KenBurnsView;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.PrimitiveIterator;
 
 import javax.inject.Inject;
@@ -38,9 +40,6 @@ public class HeadlineFragment extends Fragment implements Injectable {
 
     @Inject
     HeadlineService headlineService;
-
-    @Inject
-    IHeadlineDetail iHeadlineDetail;
 
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
@@ -67,14 +66,32 @@ public class HeadlineFragment extends Fragment implements Injectable {
     @Override
     public void onStart() {
         super.onStart();
-        headlineService.getHeadline("in")
-                .doOnSubscribe(disposable -> progressBar.setVisibility(View.VISIBLE))
-                .doFinally(() -> progressBar.setVisibility(View.GONE))
-                .subscribe(status -> {
-                    this.articlesList = status.articles;
-                    setRecyclerView(articlesList);
-                    Utils.hideKeyboard(view);
-                });
+        final AppDatabase db = AppDatabase.getAppDatabase(getActivity());
+        if (db.newsDao().newsArticles().isEmpty()) {
+            headlineService.getHeadline("in")
+                    .doOnSubscribe(disposable -> progressBar.setVisibility(View.VISIBLE))
+                    .doFinally(() -> progressBar.setVisibility(View.GONE))
+                    .subscribe(status -> {
+                        this.articlesList = status.articles;
+                        addArticlesToDb(articlesList);
+                        setRecyclerView(articlesList);
+                        Utils.hideKeyboard(view);
+                    });
+        } else {
+            List<Articles> articles = db.newsDao().newsArticles();
+            setRecyclerView(articles);
+            Utils.hideKeyboard(view);
+            progressBar.setVisibility(View.GONE);
+        }
+    }
+
+    private void addArticlesToDb(List<Articles> articles) {
+        final AppDatabase db = AppDatabase.getAppDatabase(getActivity());
+        for (int i = 0 ;i < articles.size(); i++) {
+            Articles article = articles.get(i);
+            db.newsDao().insertAt(article);
+            Log.i("HeadlineFragment.class", "addArticlesToDb: " + db.newsDao().newsArticles().get(i) + "\n");
+        }
     }
 
     private void setRecyclerView(List<Articles> articlesList) {
@@ -82,9 +99,8 @@ public class HeadlineFragment extends Fragment implements Injectable {
         headlineAdapter = new HeadlineAdapter(articlesList, getActivity());
         recyclerHeadline.setAdapter(headlineAdapter);
         loadArticles(articlesList);
-//        Log.i("HeadlienFragment.class", "setRecyclerView: " + iHeadlineDetail);
-        DividerItemDecoration itemDecorator = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
-        itemDecorator.setDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.divider));
+        DividerItemDecoration itemDecorator = new DividerItemDecoration(Objects.requireNonNull(getContext()), DividerItemDecoration.VERTICAL);
+        itemDecorator.setDrawable(Objects.requireNonNull(ContextCompat.getDrawable(Objects.requireNonNull(getActivity()), R.drawable.divider)));
         recyclerHeadline.addItemDecoration(itemDecorator);
     }
 

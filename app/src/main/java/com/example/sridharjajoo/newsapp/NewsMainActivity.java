@@ -37,6 +37,7 @@ public class NewsMainActivity extends AppCompatActivity implements HasSupportFra
         actionBar = getSupportActionBar();
         showNavigation();
         showHeadlines();
+
     }
 
     private void showHeadlines() {
