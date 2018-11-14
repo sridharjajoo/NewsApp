@@ -5,6 +5,8 @@ import android.arch.persistence.room.Embedded;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
+import com.google.gson.annotations.Expose;
+
 import lombok.Data;
 
 @Data
@@ -12,10 +14,15 @@ import lombok.Data;
 public class Articles {
 
     @PrimaryKey(autoGenerate = true)
-    public int id;
+    @ColumnInfo(name = "id")
+    @Expose(serialize = false, deserialize = false)
+    public long idArticle;
 
     @ColumnInfo(name = "news_description")
     public String description;
+
+    @ColumnInfo(name = "news_content")
+    public String content;
 
     @ColumnInfo(name = "news_image_url")
     public String urlToImage;
@@ -25,6 +32,9 @@ public class Articles {
 
     @ColumnInfo(name = "news_date")
     public String publishedAt;
+
+    @ColumnInfo(name = "news_url")
+    public String url;
 
     @Embedded
     public Source source;

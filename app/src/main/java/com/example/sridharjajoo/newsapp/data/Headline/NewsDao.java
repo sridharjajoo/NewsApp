@@ -12,6 +12,9 @@ public interface NewsDao {
     @Query("SELECT * FROM articles")
     List<Articles> newsArticles();
 
+    @Query("SELECT * FROM articles WHERE id = :pos ")
+    Articles getArticle(int pos);
+
     @Query("DELETE FROM articles")
     void deleteTable();
 

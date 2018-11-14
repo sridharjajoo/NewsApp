@@ -10,7 +10,7 @@ import com.example.sridharjajoo.newsapp.data.Favourite.Favourite;
 import com.example.sridharjajoo.newsapp.data.Headline.Articles;
 import com.example.sridharjajoo.newsapp.data.Headline.NewsDao;
 
-@Database(entities = {Articles.class, Favourite.class}, version = 4)
+@Database(entities = {Articles.class, Favourite.class}, version = 9)
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract NewsDao newsDao();

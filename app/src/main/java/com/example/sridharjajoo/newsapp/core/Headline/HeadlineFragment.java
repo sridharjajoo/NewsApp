@@ -1,7 +1,6 @@
 package com.example.sridharjajoo.newsapp.core.Headline;
 
 import android.annotation.SuppressLint;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,21 +15,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
-import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
 import com.example.sridharjajoo.newsapp.R;
 import com.example.sridharjajoo.newsapp.Utils.Utils;
 import com.example.sridharjajoo.newsapp.data.AppDatabase;
-import com.example.sridharjajoo.newsapp.data.Favourite.Favourite;
 import com.example.sridharjajoo.newsapp.data.Headline.Articles;
 import com.example.sridharjajoo.newsapp.data.Headline.HeadlineService;
 import com.example.sridharjajoo.newsapp.di.Injectable;
-import com.flaviofaria.kenburnsview.KenBurnsView;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.PrimitiveIterator;
 
 import javax.inject.Inject;
 
@@ -68,33 +61,16 @@ public class HeadlineFragment extends Fragment implements Injectable {
     @Override
     public void onStart() {
         super.onStart();
-        db = AppDatabase.getAppDatabase(getActivity());
-        if (db.newsDao().newsArticles().isEmpty()) {
-            headlineService.getHeadline("in")
-                    .doOnSubscribe(disposable -> progressBar.setVisibility(View.VISIBLE))
-                    .doFinally(() -> progressBar.setVisibility(View.GONE))
-                    .subscribe(status -> {
-                        this.articlesList = status.articles;
-                        addArticlesToDb(articlesList);
-                        setRecyclerView(articlesList);
-                        Utils.hideKeyboard(view);
-                    });
-        } else {
-            List<Articles> articles = db.newsDao().newsArticles();
-            setRecyclerView(articles);
-            Utils.hideKeyboard(view);
-            progressBar.setVisibility(View.GONE);
-        }
-    }
-
-    private void addArticlesToDb(List<Articles> articles) {
-        db = AppDatabase.getAppDatabase(getActivity());
-        for (int i = 0 ;i < articles.size(); i++) {
-            Articles article = articles.get(i);
-            Favourite favourite = new Favourite();
-            favourite.articles = article;
-            db.newsDao().insertAt(article);
-        }
+        db = AppDatabase.getAppDatabase(Objects.requireNonNull(getActivity()));
+        headlineService.getHeadline("in")
+                .doOnSubscribe(disposable -> progressBar.setVisibility(View.VISIBLE))
+                .doFinally(() -> progressBar.setVisibility(View.GONE))
+                .subscribe(status -> {
+                    this.articlesList = status.articles;
+                    Log.i("HeadlineFragemnt", "onStart: " + db.newsDao().getArticle(2).idArticle);
+                    setRecyclerView(articlesList);
+                    Utils.hideKeyboard(view);
+                });
     }
 
     private void setRecyclerView(List<Articles> articlesList) {
@@ -112,13 +88,7 @@ public class HeadlineFragment extends Fragment implements Injectable {
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public void onStop() {
         super.onStop();
-        db.newsDao().deleteTable();
     }
 }

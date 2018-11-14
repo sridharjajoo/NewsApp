@@ -1,6 +1,7 @@
 package com.example.sridharjajoo.newsapp;
 
 import android.app.Activity;
+import android.content.Context;
 import android.support.multidex.MultiDexApplication;
 
 import com.example.sridharjajoo.newsapp.di.AppInjector;
@@ -13,6 +14,8 @@ import dagger.android.HasActivityInjector;
 
 public class NewsMainApplication extends MultiDexApplication implements HasActivityInjector {
 
+    public static volatile Context context;
+
     @Inject
     DispatchingAndroidInjector<Activity> dispatchingAndroidInjector;
 
@@ -24,6 +27,7 @@ public class NewsMainApplication extends MultiDexApplication implements HasActiv
     @Override
     public void onCreate() {
         super.onCreate();
+        context = getApplicationContext();
         AppInjector.init(this);
     }
 }

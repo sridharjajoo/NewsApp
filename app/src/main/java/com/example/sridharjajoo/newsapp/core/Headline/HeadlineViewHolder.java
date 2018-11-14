@@ -1,5 +1,7 @@
 package com.example.sridharjajoo.newsapp.core.Headline;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -32,13 +34,4 @@ public class HeadlineViewHolder extends RecyclerView.ViewHolder {
         favouriteCheckbox = (CheckBox) itemView.findViewById(R.id.favourite_icon);
     }
 
-    public void handleClickAction(View view, String description, String urlToImage) {
-        AppCompatActivity appCompatActivity = (AppCompatActivity) view.getContext();
-        Fragment fragment = new HeadlineDetail();
-        appCompatActivity.getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.frame_container, fragment)
-                .addToBackStack(null)
-                .commit();
-    }
 }

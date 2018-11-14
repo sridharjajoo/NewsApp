@@ -5,4 +5,5 @@
     <string name="favourite">Favourite</string>
     <string name="published_at">Published At:</string>
     <string name="source">Source</string>
+    <string name="button_read_full_story" >Read full story</string>
 </resources>

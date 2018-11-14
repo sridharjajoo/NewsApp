@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import com.example.sridharjajoo.newsapp.R;
 import com.example.sridharjajoo.newsapp.di.Injectable;
 
-public class HeadlineDetail extends Fragment implements Injectable, IHeadlineDetail {
+public class HeadlineDetail extends Fragment implements Injectable {
 
     private View view;
 
@@ -21,15 +21,5 @@ public class HeadlineDetail extends Fragment implements Injectable, IHeadlineDet
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_headline_detail, container, false);
         return view;
-    }
-
-    @Override
-    public void imageUrl(String image) {
-        Log.i("HeadlineDetials", "imageUrl: "  + image);
-    }
-
-    @Override
-    public void articleDescription(String description) {
-
     }
 }
