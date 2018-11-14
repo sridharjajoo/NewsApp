@@ -1,6 +1,7 @@
 package com.example.sridharjajoo.newsapp.data.Headline;
 
 import com.example.sridharjajoo.newsapp.data.CustomSearch.CustomSearchResponse;
+import com.example.sridharjajoo.newsapp.data.Settings.SettingsResponse;
 
 import io.reactivex.Observable;
 import io.reactivex.annotations.NonNull;
@@ -12,4 +13,7 @@ public interface HeadlineService {
 
     @NonNull
     Observable<CustomSearchResponse> getCustomSearchReponse(String query);
+
+    @NonNull
+    Observable<SettingsResponse> getSources();
 }

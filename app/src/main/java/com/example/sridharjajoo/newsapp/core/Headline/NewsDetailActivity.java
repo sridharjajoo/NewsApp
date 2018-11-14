@@ -43,9 +43,9 @@ public class NewsDetailActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         Bundle bundle = getIntent().getExtras();
         assert bundle != null;
-        if (bundle.getInt("pos") != -1) {
+        if (bundle.getString("title") != null) {
             int pos = bundle.getInt("pos");
-            Articles currentArticle = AppDatabase.getAppDatabase(this).newsDao().getArticle(pos);
+            Articles currentArticle = AppDatabase.getAppDatabase(this).newsDao().getArticleString(bundle.getString("title"));
             Log.i("NewsDetails", "onCreate: " + currentArticle);
                         newsDetails.setText(currentArticle.content);
             Glide.with(this).load(currentArticle.urlToImage).into(newsDetailsImage);

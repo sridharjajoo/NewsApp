@@ -20,7 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".core.Headline.NewsDetailActivity"></activity>
+        <activity android:name=".core.Headline.NewsDetailActivity" />
+        <activity android:name=".core.Setttings.SettingsActivity"></activity>
     </application>
 
 </manifest>

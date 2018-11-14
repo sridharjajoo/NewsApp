@@ -2,11 +2,16 @@ package com.example.sridharjajoo.newsapp.data.Headline;
 
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
+import com.example.sridharjajoo.newsapp.Utils.Utils;
 import com.example.sridharjajoo.newsapp.data.AppDatabase;
 import com.example.sridharjajoo.newsapp.data.CustomSearch.CustomSearchResponse;
+import com.example.sridharjajoo.newsapp.data.Settings.SettingsResponse;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -30,15 +35,31 @@ public class HeadlineServiceImpl implements HeadlineService {
 
     @Override
     public Observable<HeadlineResponse> getHeadline(String headlineRequest) {
-        return headlineApi.getHeadlines()
-                .doOnNext(this::syncSave)
+        List<String> list = sharedPreferenceHandle();
+        String csvString = Utils.getCSVString(list);
+        if (csvString.isEmpty()) {
+            return headlineApi.getHeadlines("in", Utils.apiKey)
+                    .doOnNext(this::syncSave)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(mainThread());
+        } else {
+            return headlineApi.getHeadlinesFiltered(csvString, Utils.apiKey)
+                    .doOnNext(this::syncSave)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(mainThread());
+        }
+    }
+
+    @Override
+    public Observable<CustomSearchResponse> getCustomSearchReponse(String query) {
+        return headlineApi.getSearchResponse(query, Utils.apiKey)
                 .subscribeOn(Schedulers.io())
                 .observeOn(mainThread());
     }
 
     @Override
-    public Observable<CustomSearchResponse> getCustomSearchReponse(String query) {
-        return headlineApi.getSearchResponse(query, "aaefc3faa210424e9978fa75586d9580")
+    public Observable<SettingsResponse> getSources() {
+        return headlineApi.getSourcesResponse(Utils.apiKey, "in")
                 .subscribeOn(Schedulers.io())
                 .observeOn(mainThread());
     }
@@ -53,5 +74,20 @@ public class HeadlineServiceImpl implements HeadlineService {
             Log.i("HeadlineService", "syncSave: " + appDatabase.newsDao().newsArticles().get(i) + "\n");
             i++;
         }
+    }
+
+    private List<String> sharedPreferenceHandle() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        boolean times = sharedPreferences.getBoolean("time", false);
+        boolean hindu = sharedPreferences.getBoolean("hindu", false);
+        boolean google = sharedPreferences.getBoolean("google", false);
+        String query = times ? "the-times-of-india" : "";
+        String query2 = hindu ? "the-hindu" : "";
+        String query3 = google ? "google-news-in" : "";
+        List<String> list = new ArrayList<>();
+        list.add(query);
+        list.add(query2);
+        list.add(query3);
+        return list;
     }
 }

@@ -111,10 +111,6 @@ public class SearchFragment extends Fragment implements Injectable {
                 return false;
             }
         });
-        searchView.setOnClickListener(v -> {
-                }
-        );
-
         item.setActionView(searchView);
     }
 }

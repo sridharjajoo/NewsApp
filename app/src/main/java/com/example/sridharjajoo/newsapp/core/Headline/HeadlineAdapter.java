@@ -105,8 +105,10 @@ public class HeadlineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         viewHolder.newsImage.setOnClickListener(view -> {
             Intent intent = new Intent(context, NewsDetailActivity.class);
             intent.putExtra("pos", viewHolder.getAdapterPosition() + 1);
+            intent.putExtra("title", currentItem.title);
             context.startActivity(intent);
         });
+
         Favourite favourite = new Favourite();
         favourite.articles = currentItem;
         viewHolder.favouriteCheckbox.setOnCheckedChangeListener((compoundButton, isChecked) -> {
@@ -115,7 +117,7 @@ public class HeadlineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         });
         viewHolder.description.setText(currentItem.title);
         viewHolder.newsSource.setText(currentItem.source.name);
-        viewHolder.newsTime.setText(Utils.formattedDate(currentItem.publishedAt));
+//        viewHolder.newsTime.setText(Utils.formattedDate(currentItem.publishedAt));
         viewHolder.cardView.setElevation(0);
 
         Glide.with(context)

@@ -15,6 +15,9 @@ public interface NewsDao {
     @Query("SELECT * FROM articles WHERE id = :pos ")
     Articles getArticle(int pos);
 
+    @Query("SELECT * FROM articles WHERE news_title = :currentTitle")
+    Articles getArticleString(String currentTitle);
+
     @Query("DELETE FROM articles")
     void deleteTable();
 

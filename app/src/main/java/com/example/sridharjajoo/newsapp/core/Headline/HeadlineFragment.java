@@ -67,7 +67,6 @@ public class HeadlineFragment extends Fragment implements Injectable {
                 .doFinally(() -> progressBar.setVisibility(View.GONE))
                 .subscribe(status -> {
                     this.articlesList = status.articles;
-                    Log.i("HeadlineFragemnt", "onStart: " + db.newsDao().getArticle(2).idArticle);
                     setRecyclerView(articlesList);
                     Utils.hideKeyboard(view);
                 });
