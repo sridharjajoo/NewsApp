@@ -1,5 +1,8 @@
 package com.example.sridharjajoo.newsapp;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -14,6 +17,8 @@ import com.example.sridharjajoo.newsapp.core.Favourite.FavouriteFragment;
 import com.example.sridharjajoo.newsapp.core.Headline.HeadlineFragment;
 import com.example.sridharjajoo.newsapp.core.Search.SearchFragment;
 import com.example.sridharjajoo.newsapp.core.Setttings.SettingsActivity;
+
+import java.util.Calendar;
 
 import javax.inject.Inject;
 
@@ -40,8 +45,29 @@ public class NewsMainActivity extends AppCompatActivity implements HasSupportFra
         ButterKnife.bind(this);
         actionBar = getSupportActionBar();
         showNavigation();
+        setAlarm();
         showHeadlines();
+    }
 
+    private void setAlarm() {
+        // Retrieve a PendingIntent that will perform a broadcast
+        Intent alarmIntent = new Intent(NewsMainActivity.this,
+                AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                NewsMainActivity.this, 0, alarmIntent, 0);
+
+        AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+        // Set the alarm to start at 10:00 AM
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, 8);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+
+        manager.setRepeating(AlarmManager.RTC_WAKEUP,
+                calendar.getTimeInMillis(), 86400000, // for repeating
+                pendingIntent);
     }
 
     private void showHeadlines() {
@@ -112,4 +138,5 @@ public class NewsMainActivity extends AppCompatActivity implements HasSupportFra
         }
         return super.onOptionsItemSelected(item);
     }
+
 }
