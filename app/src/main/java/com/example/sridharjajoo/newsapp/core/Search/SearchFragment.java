@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.example.sridharjajoo.newsapp.R;
 import com.example.sridharjajoo.newsapp.Utils.Utils;
@@ -84,6 +85,9 @@ public class SearchFragment extends Fragment implements Injectable {
     @Override
     public void onStart() {
         super.onStart();
+        if (!Utils.hasNetwork()) {
+            Toast.makeText(getActivity(), "Network not available!", Toast.LENGTH_SHORT).show();
+        }
         searchViewModel.getProgress().observe(this, progressBar::setVisibility);
     }
 

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
+import android.util.Log;
 import android.view.View;
 
 import com.example.sridharjajoo.newsapp.data.Headline.Articles;
@@ -31,7 +32,8 @@ public class SearchViewModel extends ViewModel {
                 .doFinally(() -> progress.setValue(View.GONE))
                 .subscribe(response -> {
                     articles.setValue(response.articles);
-                });
+                }
+                , error -> Log.i("SearchViewModel.class", "customSearch: " + error));
         return articles;
     }
 

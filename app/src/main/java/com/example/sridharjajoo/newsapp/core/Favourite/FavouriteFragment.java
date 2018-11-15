@@ -16,9 +16,11 @@ import android.view.ViewGroup;
 
 import com.example.sridharjajoo.newsapp.R;
 import com.example.sridharjajoo.newsapp.core.Headline.HeadlineAdapter;
+import com.example.sridharjajoo.newsapp.core.Search.SearchAdapter;
 import com.example.sridharjajoo.newsapp.data.AppDatabase;
 import com.example.sridharjajoo.newsapp.data.Favourite.Favourite;
 import com.example.sridharjajoo.newsapp.data.Headline.Articles;
+import com.example.sridharjajoo.newsapp.data.Headline.Source;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +37,7 @@ public class FavouriteFragment extends Fragment {
 
     private View view;
     private AppDatabase db;
-    private HeadlineAdapter headlineAdapter;
+    private SearchAdapter searchAdapter;
     private List<Articles> listArticles = new ArrayList<>();
 
     @Nullable
@@ -59,8 +61,8 @@ public class FavouriteFragment extends Fragment {
 
     private void setRecyclerView(List<Articles> articlesList) {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        headlineAdapter = new HeadlineAdapter(articlesList, getActivity(), db);
-        recyclerView.setAdapter(headlineAdapter);
+        searchAdapter = new SearchAdapter(articlesList, getActivity(), db);
+        recyclerView.setAdapter(searchAdapter);
         loadArticles(articlesList);
         DividerItemDecoration itemDecorator = new DividerItemDecoration(Objects.requireNonNull(getContext()), DividerItemDecoration.VERTICAL);
         itemDecorator.setDrawable(Objects.requireNonNull(ContextCompat.getDrawable(Objects.requireNonNull(getActivity()), R.drawable.divider)));
@@ -68,6 +70,6 @@ public class FavouriteFragment extends Fragment {
     }
 
     private void loadArticles(List<Articles> articlesList) {
-        headlineAdapter.setArticlesList(articlesList);
+        searchAdapter.setArticlesList(articlesList);
     }
 }

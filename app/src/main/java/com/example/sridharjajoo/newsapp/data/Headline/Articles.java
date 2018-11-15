@@ -7,6 +7,7 @@ import android.arch.persistence.room.PrimaryKey;
 
 import com.google.gson.annotations.Expose;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data

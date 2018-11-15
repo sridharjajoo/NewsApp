@@ -41,21 +41,4 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:text="@string/google_news_india" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/order_by_time"
-        android:gravity="center"
-        android:layout_marginTop="20dp"
-        android:textStyle="bold" />
-
-    <CheckBox
-        android:id="@+id/order_time"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_margin="10dp"
-        android:text="Do you want to Order by time?" />
-
-
 </LinearLayout>
