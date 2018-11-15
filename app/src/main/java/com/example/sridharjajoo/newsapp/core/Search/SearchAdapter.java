@@ -1,4 +1,4 @@
-package com.example.sridharjajoo.newsapp.core.Headline;
+package com.example.sridharjajoo.newsapp.core.Search;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -23,6 +23,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.example.sridharjajoo.newsapp.R;
 import com.example.sridharjajoo.newsapp.Utils.Utils;
+import com.example.sridharjajoo.newsapp.core.Headline.NewsDetailActivity;
 import com.example.sridharjajoo.newsapp.data.AppDatabase;
 import com.example.sridharjajoo.newsapp.data.Favourite.Favourite;
 import com.example.sridharjajoo.newsapp.data.Headline.Articles;
@@ -31,14 +32,14 @@ import java.util.List;
 
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
-public class HeadlineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
+public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private final List<Articles> articlesList;
     private final Context context;
     private List<Articles> articles;
     private final AppDatabase db;
 
-    public HeadlineAdapter(List<Articles> articlesList, FragmentActivity activity, AppDatabase db) {
+    public SearchAdapter(List<Articles> articlesList, FragmentActivity activity, AppDatabase db) {
         this.articlesList = articlesList;
         this.context = activity;
         this.db = db;
@@ -48,15 +49,8 @@ public class HeadlineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-
-        switch (viewType) {
-            case 0:
-                View viewTop = layoutInflater.inflate(R.layout.item_headline_top, parent, false);
-                return new HeadlineViewHolderTop(viewTop);
-            default:
-                View view = layoutInflater.inflate(R.layout.item_headline, parent, false);
-                return new HeadlineViewHolder(view);
-        }
+        View view = layoutInflater.inflate(R.layout.item_headline, parent, false);
+        return new SearchViewHolder(view);
     }
 
     @Override
@@ -67,53 +61,19 @@ public class HeadlineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         Articles currentItem = articlesList.get(position);
-        switch (holder.getItemViewType()) {
-            case 0:
-                HeadlineViewHolderTop viewHolderTop = (HeadlineViewHolderTop) holder;
-                configureViewHolderTop(viewHolderTop, currentItem);
-                break;
-            default:
-                HeadlineViewHolder viewHolder = (HeadlineViewHolder) holder;
-                configureViewHolder(viewHolder, currentItem);
-                break;
-        }
+        SearchViewHolder viewHolder = (SearchViewHolder) holder;
+        configureViewHolder(viewHolder, currentItem);
     }
 
-    @SuppressLint("CheckResult")
-    private void configureViewHolderTop(HeadlineViewHolderTop viewHolderTop, Articles currentItem) {
-        viewHolderTop.itemView.setOnClickListener(view -> {
-            Intent intent = new Intent(context, NewsDetailActivity.class);
-            intent.putExtra("pos", viewHolderTop.getAdapterPosition() + 1);
-            intent.putExtra("title", currentItem.title);
-            context.startActivity(intent);
-        });
-        viewHolderTop.headlineTitle.setText(currentItem.title);
-        viewHolderTop.cardView.setElevation(0);
-        Glide.with(context)
-                .asBitmap()
-                .load(currentItem.urlToImage)
-                .listener(new RequestListener<Bitmap>() {
-                    @Override
-                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
-                        viewHolderTop.kenBurnsView.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_insert_photo_black_24dp));
-                        return false;
-                    }
 
-                    @Override
-                    public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
-                        viewHolderTop.kenBurnsView.setImageBitmap(resource);
-                        return true;
-                    }
-                }).submit();
-    }
-
-    private void configureViewHolder(HeadlineViewHolder viewHolder, Articles currentItem) {
-        viewHolder.itemView.setOnClickListener(view -> {
+    private void configureViewHolder(SearchViewHolder viewHolder, Articles currentItem) {
+        viewHolder.newsImage.setOnClickListener(view -> {
             Intent intent = new Intent(context, NewsDetailActivity.class);
             intent.putExtra("pos", viewHolder.getAdapterPosition() + 1);
             intent.putExtra("title", currentItem.title);
             context.startActivity(intent);
         });
+
         Favourite favourite = new Favourite();
         favourite.articles = currentItem;
         int count = db.favoriteDao().isPresent(currentItem.title);

@@ -10,7 +10,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.example.sridharjajoo.newsapp.core.FavouriteFragment;
+import com.example.sridharjajoo.newsapp.core.Favourite.FavouriteFragment;
 import com.example.sridharjajoo.newsapp.core.Headline.HeadlineFragment;
 import com.example.sridharjajoo.newsapp.core.Search.SearchFragment;
 import com.example.sridharjajoo.newsapp.core.Setttings.SettingsActivity;

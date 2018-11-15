@@ -39,12 +39,12 @@ public class HeadlineServiceImpl implements HeadlineService {
         String csvString = Utils.getCSVString(list);
         if (csvString.isEmpty()) {
             return headlineApi.getHeadlines("in", Utils.apiKey)
-                    .doOnNext(this::syncSave)
+                    .doOnNext(this::syncSaveHeadlines)
                     .subscribeOn(Schedulers.io())
                     .observeOn(mainThread());
         } else {
             return headlineApi.getHeadlinesFiltered(csvString, Utils.apiKey)
-                    .doOnNext(this::syncSave)
+                    .doOnNext(this::syncSaveHeadlines)
                     .subscribeOn(Schedulers.io())
                     .observeOn(mainThread());
         }
@@ -53,8 +53,17 @@ public class HeadlineServiceImpl implements HeadlineService {
     @Override
     public Observable<CustomSearchResponse> getCustomSearchReponse(String query) {
         return headlineApi.getSearchResponse(query, Utils.apiKey)
+                .doOnNext(this::syncSaveCustom)
                 .subscribeOn(Schedulers.io())
                 .observeOn(mainThread());
+    }
+
+    private void syncSaveCustom(CustomSearchResponse response) {
+        appDatabase = AppDatabase.getAppDatabase(context);
+        List<Articles> articles = response.articles;
+        for (Articles newsArticle : articles) {
+            appDatabase.newsDao().insertAt(newsArticle);
+        }
     }
 
     @Override
@@ -65,7 +74,7 @@ public class HeadlineServiceImpl implements HeadlineService {
     }
 
     //store the articles list to DB
-    public void syncSave(HeadlineResponse headlineResponse) {
+    public void syncSaveHeadlines(HeadlineResponse headlineResponse) {
         appDatabase = AppDatabase.getAppDatabase(context);
         List<Articles> articles = headlineResponse.articles;
         for (Articles newsArticle : articles) {

@@ -2,6 +2,10 @@ package com.example.sridharjajoo.newsapp.Utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.preference.PreferenceManager;
@@ -10,6 +14,7 @@ import android.view.inputmethod.InputMethodManager;
 
 import com.example.sridharjajoo.newsapp.NewsMainApplication;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -67,5 +72,26 @@ public class Utils {
                 = (ConnectivityManager) NewsMainApplication.context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    public String getCountry() {
+        String country_name = null;
+        LocationManager lm = (LocationManager)(NewsMainApplication.context).getSystemService(Context.LOCATION_SERVICE);
+        Geocoder geocoder = new Geocoder(NewsMainApplication.context);
+        for(String provider: lm.getAllProviders()) {
+            @SuppressWarnings("ResourceType") Location location = lm.getLastKnownLocation(provider);
+            if(location!=null) {
+                try {
+                    List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+                    if(addresses != null && addresses.size() > 0) {
+                        country_name = addresses.get(0).getCountryName();
+                        break;
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return country_name;
     }
 }

@@ -8,8 +8,6 @@ import android.widget.TextView;
 import com.example.sridharjajoo.newsapp.R;
 import com.flaviofaria.kenburnsview.KenBurnsView;
 
-import org.w3c.dom.Text;
-
 public class HeadlineViewHolderTop extends RecyclerView.ViewHolder {
 
     public TextView headlineTitle;

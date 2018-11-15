@@ -1,6 +1,9 @@
 package com.example.sridharjajoo.newsapp.core.Headline;
 
 import android.annotation.SuppressLint;
+import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,14 +12,13 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
+
 import com.example.sridharjajoo.newsapp.R;
-import com.example.sridharjajoo.newsapp.Utils.Utils;
 import com.example.sridharjajoo.newsapp.data.AppDatabase;
 import com.example.sridharjajoo.newsapp.data.Headline.Articles;
 import com.example.sridharjajoo.newsapp.data.Headline.HeadlineService;
@@ -31,6 +33,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class HeadlineFragment extends Fragment implements Injectable {
+
+    @Inject
+    ViewModelProvider.Factory viewModelFactory;
 
     @Inject
     HeadlineService headlineService;
@@ -48,12 +53,16 @@ public class HeadlineFragment extends Fragment implements Injectable {
     private HeadlineAdapter headlineAdapter;
     private View view;
     private AppDatabase db;
+    protected LocationManager locationManager;
+    private HeadlineViewModel headlineViewModel;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_headline, container, false);
         ButterKnife.bind(this, view);
+        db = AppDatabase.getAppDatabase(Objects.requireNonNull(getActivity()));
+        headlineViewModel = ViewModelProviders.of(this, viewModelFactory).get(HeadlineViewModel.class);
         return view;
     }
 
@@ -61,19 +70,17 @@ public class HeadlineFragment extends Fragment implements Injectable {
     @Override
     public void onStart() {
         super.onStart();
-        db = AppDatabase.getAppDatabase(Objects.requireNonNull(getActivity()));
-        Log.i("HeadlineFragment", "onStart: " + db.newsDao().getCount());
+        headlineViewModel.getProgress().observe(this, progressBar::setVisibility);
+        loadNewsArticles();
+    }
 
-        headlineService.getHeadline("in")
-                .doOnSubscribe(disposable -> progressBar.setVisibility(View.VISIBLE))
-                .doFinally(() -> progressBar.setVisibility(View.GONE))
-                .subscribe(status -> {
-                    this.articlesList = status.articles;
-                    setRecyclerView(articlesList);
-                    Utils.hideKeyboard(view);
-                }, error -> {
-                    Log.i("HeadlineFragment.class", "onStart: " + error);
-                });
+    private void loadNewsArticles() {
+        headlineViewModel.getNewsArticles().observe(this, list -> {
+            articlesList = list;
+            if (articlesList != null) {
+                setRecyclerView(articlesList);
+            }
+        });
     }
 
     private void setRecyclerView(List<Articles> articlesList) {

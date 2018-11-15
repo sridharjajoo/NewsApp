@@ -1,4 +1,4 @@
-package com.example.sridharjajoo.newsapp.core.Headline;
+package com.example.sridharjajoo.newsapp.core.Search;
 
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.example.sridharjajoo.newsapp.R;
 
-public class HeadlineViewHolder extends RecyclerView.ViewHolder {
+public class SearchViewHolder extends RecyclerView.ViewHolder {
 
     public TextView description;
     public ImageView newsImage;
@@ -18,7 +18,7 @@ public class HeadlineViewHolder extends RecyclerView.ViewHolder {
     public TextView newsSource;
     public CheckBox favouriteCheckbox;
 
-    public HeadlineViewHolder(View itemView) {
+    public SearchViewHolder(View itemView) {
         super(itemView);
         description = (TextView) itemView.findViewById(R.id.description);
         newsImage = (ImageView) itemView.findViewById(R.id.image_news);
@@ -27,5 +27,4 @@ public class HeadlineViewHolder extends RecyclerView.ViewHolder {
         newsSource = (TextView) itemView.findViewById(R.id.news_source);
         favouriteCheckbox = (CheckBox) itemView.findViewById(R.id.favourite_icon);
     }
-
 }

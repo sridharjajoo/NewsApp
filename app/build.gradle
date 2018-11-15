@@ -84,4 +84,8 @@ dependencies {
     implementation 'com.flaviofaria:kenburnsview:1.0.7'
     implementation 'com.android.support:customtabs:27.1.0'
 
+    implementation "android.arch.lifecycle:runtime:1.1.1"
+    implementation "android.arch.lifecycle:extensions:1.1.1"
+    implementation "android.arch.lifecycle:common-java8:1.1.1"
+    annotationProcessor "android.arch.lifecycle:compiler:1.1.1"
 }

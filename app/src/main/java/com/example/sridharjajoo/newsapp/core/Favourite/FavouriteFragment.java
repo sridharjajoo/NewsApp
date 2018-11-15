@@ -1,4 +1,4 @@
-package com.example.sridharjajoo.newsapp.core;
+package com.example.sridharjajoo.newsapp.core.Favourite;
 
 import android.arch.persistence.room.RoomDatabase;
 import android.os.Bundle;

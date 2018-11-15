@@ -17,7 +17,7 @@ public class Favourite {
     @PrimaryKey(autoGenerate = true)
     public int idFavourite;
 
-    @Embedded
+    @Embedded(prefix = "article")
     public Articles articles;
 }
 
