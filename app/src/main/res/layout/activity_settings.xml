@@ -14,25 +14,48 @@
         android:layout_height="wrap_content"
         android:visibility="gone" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:text="@string/choose_the_news_sources"
+        android:textStyle="bold" />
+
     <CheckBox
         android:id="@+id/times_of_india"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/the_times_of_india"
-        android:layout_margin="10dp"/>
+        android:layout_margin="10dp"
+        android:text="@string/the_times_of_india" />
 
     <CheckBox
         android:id="@+id/the_hindu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/the_hindu"
-        android:layout_margin="10dp"/>
+        android:layout_margin="10dp"
+        android:text="@string/the_hindu" />
 
     <CheckBox
         android:id="@+id/google_news_india"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/google_news_india"
-        android:layout_margin="10dp"/>
+        android:layout_margin="10dp"
+        android:text="@string/google_news_india" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/order_by_time"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold" />
+
+    <CheckBox
+        android:id="@+id/order_time"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_margin="10dp"
+        android:text="Do you want to Order by time?" />
+
 
 </LinearLayout>

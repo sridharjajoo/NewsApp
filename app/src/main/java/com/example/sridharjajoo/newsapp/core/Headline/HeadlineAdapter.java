@@ -49,14 +49,14 @@ public class HeadlineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
 
-//        switch (viewType) {
-//            case 0:
-//                View viewTop = layoutInflater.inflate(R.layout.item_headline_top, parent, false);
-//                return new HeadlineViewHolderTop(viewTop);
-//            default:
+        switch (viewType) {
+            case 0:
+                View viewTop = layoutInflater.inflate(R.layout.item_headline_top, parent, false);
+                return new HeadlineViewHolderTop(viewTop);
+            default:
                 View view = layoutInflater.inflate(R.layout.item_headline, parent, false);
                 return new HeadlineViewHolder(view);
-//        }
+        }
     }
 
     @Override
@@ -67,16 +67,16 @@ public class HeadlineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         Articles currentItem = articlesList.get(position);
-//        switch (holder.getItemViewType()) {
-//            case 0:
-//                HeadlineViewHolderTop viewHolderTop = (HeadlineViewHolderTop) holder;
-//                configureViewHolderTop(viewHolderTop, currentItem);
-//                break;
-//            default:
+        switch (holder.getItemViewType()) {
+            case 0:
+                HeadlineViewHolderTop viewHolderTop = (HeadlineViewHolderTop) holder;
+                configureViewHolderTop(viewHolderTop, currentItem);
+                break;
+            default:
                 HeadlineViewHolder viewHolder = (HeadlineViewHolder) holder;
                 configureViewHolder(viewHolder, currentItem);
-//                break;
-//        }
+                break;
+        }
     }
 
     @SuppressLint("CheckResult")
@@ -117,7 +117,8 @@ public class HeadlineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         });
         viewHolder.description.setText(currentItem.title);
         viewHolder.newsSource.setText(currentItem.source.name);
-//        viewHolder.newsTime.setText(Utils.formattedDate(currentItem.publishedAt));
+        if (!currentItem.source.name.equals("Google News (India)"))
+            viewHolder.newsTime.setText(Utils.formattedDate(currentItem.publishedAt));
         viewHolder.cardView.setElevation(0);
 
         Glide.with(context)

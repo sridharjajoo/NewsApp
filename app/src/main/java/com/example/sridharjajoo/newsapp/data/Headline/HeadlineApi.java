@@ -5,6 +5,7 @@ import com.example.sridharjajoo.newsapp.data.CustomSearch.CustomSearchResponse;
 import com.example.sridharjajoo.newsapp.data.Settings.SettingsResponse;
 
 import io.reactivex.Observable;
+import retrofit2.Response;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 

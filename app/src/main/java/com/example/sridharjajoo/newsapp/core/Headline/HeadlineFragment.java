@@ -62,6 +62,8 @@ public class HeadlineFragment extends Fragment implements Injectable {
     public void onStart() {
         super.onStart();
         db = AppDatabase.getAppDatabase(Objects.requireNonNull(getActivity()));
+        Log.i("HeadlineFragment", "onStart: " + db.newsDao().getCount());
+
         headlineService.getHeadline("in")
                 .doOnSubscribe(disposable -> progressBar.setVisibility(View.VISIBLE))
                 .doFinally(() -> progressBar.setVisibility(View.GONE))
@@ -69,6 +71,8 @@ public class HeadlineFragment extends Fragment implements Injectable {
                     this.articlesList = status.articles;
                     setRecyclerView(articlesList);
                     Utils.hideKeyboard(view);
+                }, error -> {
+                    Log.i("HeadlineFragment.class", "onStart: " + error);
                 });
     }
 
@@ -84,10 +88,5 @@ public class HeadlineFragment extends Fragment implements Injectable {
 
     private void loadArticles(List<Articles> articlesList) {
         headlineAdapter.setArticlesList(articlesList);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
     }
 }

@@ -18,6 +18,9 @@ public interface NewsDao {
     @Query("SELECT * FROM articles WHERE news_title = :currentTitle")
     Articles getArticleString(String currentTitle);
 
+    @Query("SELECT COUNT(*) FROM articles")
+    int getCount();
+
     @Query("DELETE FROM articles")
     void deleteTable();
 

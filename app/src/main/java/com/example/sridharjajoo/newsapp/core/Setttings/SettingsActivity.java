@@ -104,7 +104,7 @@ public class SettingsActivity extends AppCompatActivity implements HasSupportFra
 
     private void loadSourcesList(List<SourceSettings> sourcesList) {
         settingsAdapter.setSourceSettingsList(sourcesList);
-    };
+    }
 
     @Override
     public AndroidInjector<Fragment> supportFragmentInjector() {

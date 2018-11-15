@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.sridharjajoo.newsapp.R;
+import com.example.sridharjajoo.newsapp.Utils.Utils;
 import com.example.sridharjajoo.newsapp.data.AppDatabase;
 import com.example.sridharjajoo.newsapp.data.Headline.Articles;
 
@@ -44,10 +45,8 @@ public class NewsDetailActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         assert bundle != null;
         if (bundle.getString("title") != null) {
-            int pos = bundle.getInt("pos");
             Articles currentArticle = AppDatabase.getAppDatabase(this).newsDao().getArticleString(bundle.getString("title"));
-            Log.i("NewsDetails", "onCreate: " + currentArticle);
-                        newsDetails.setText(currentArticle.content);
+            newsDetails.setText(Utils.truncateExtra(currentArticle.content));
             Glide.with(this).load(currentArticle.urlToImage).into(newsDetailsImage);
             newsSource.setText(currentArticle.source.name);
             newsTitle.setText(currentArticle.title);
@@ -60,6 +59,4 @@ public class NewsDetailActivity extends AppCompatActivity {
             });
         }
     }
-
-
 }

@@ -5,6 +5,7 @@ import com.example.sridharjajoo.newsapp.data.Settings.SettingsResponse;
 
 import io.reactivex.Observable;
 import io.reactivex.annotations.NonNull;
+import retrofit2.Response;
 
 public interface HeadlineService {
 

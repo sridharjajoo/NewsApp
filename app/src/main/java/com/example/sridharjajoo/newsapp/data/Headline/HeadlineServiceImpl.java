@@ -4,7 +4,6 @@ package com.example.sridharjajoo.newsapp.data.Headline;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 import com.example.sridharjajoo.newsapp.Utils.Utils;
 import com.example.sridharjajoo.newsapp.data.AppDatabase;
@@ -18,6 +17,7 @@ import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
+import retrofit2.Response;
 
 import static io.reactivex.android.schedulers.AndroidSchedulers.mainThread;
 
@@ -68,11 +68,8 @@ public class HeadlineServiceImpl implements HeadlineService {
     public void syncSave(HeadlineResponse headlineResponse) {
         appDatabase = AppDatabase.getAppDatabase(context);
         List<Articles> articles = headlineResponse.articles;
-        int i = 0;
-        for (Articles newsArticle: articles) {
+        for (Articles newsArticle : articles) {
             appDatabase.newsDao().insertAt(newsArticle);
-            Log.i("HeadlineService", "syncSave: " + appDatabase.newsDao().newsArticles().get(i) + "\n");
-            i++;
         }
     }
 

@@ -2,9 +2,13 @@ package com.example.sridharjajoo.newsapp.Utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+
+import com.example.sridharjajoo.newsapp.NewsMainApplication;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -52,4 +56,16 @@ public class Utils {
         return csvBuilder.toString();
     }
 
+    public static String truncateExtra(String content) {
+        if (content == null)
+            return "";
+        return content.replaceAll("(\\[\\+\\d+ chars])", "");
+    }
+
+    public static boolean hasNetwork() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) NewsMainApplication.context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
 }
