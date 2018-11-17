@@ -21,4 +21,5 @@ Also Room was used for adding offline support.
 
 ## Screenshots
 
-<img src="https://imgur.com/a/9dTyMct">
+<img src="http://www.simpleimageresizer.com/_uploads/photos/4b237c00/Screenshot_20181117-102632_1_1_50.png">
+ <img src="http://www.simpleimageresizer.com/_uploads/photos/4b237c00/Screenshot_20181117-102702_1_24.png">
