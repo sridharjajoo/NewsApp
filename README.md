@@ -21,8 +21,3 @@ Also Room was used for adding offline support.
 
 ## Gitter Channel
 [![Gitter](https://img.shields.io/badge/chat-on%20gitter-ff006f.svg)](https://gitter.im/news_app_kwoc)
-
-## Screenshots
-
-<img src="http://www.simpleimageresizer.com/_uploads/photos/4b237c00/Screenshot_20181117-102632_1_1_50.png">
- <img src="http://www.simpleimageresizer.com/_uploads/photos/4b237c00/Screenshot_20181117-102702_1_24.png">
