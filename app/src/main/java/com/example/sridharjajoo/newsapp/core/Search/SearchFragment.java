@@ -99,6 +99,19 @@ public class SearchFragment extends Fragment implements Injectable {
         Drawable drawable = ContextCompat.getDrawable(getActivity(), R.drawable.ic_search_black_24dp);
         drawable.setTint(ContextCompat.getColor(getActivity(), R.color.white));
         item.setIcon(drawable);
+        
+        item.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem item) {
+                Utils.showKeyboard(getView());
+                return true;
+            }
+
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem item) {
+                return false;
+            }
+        });
 
         SearchView searchView = new SearchView(getActivity());
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
