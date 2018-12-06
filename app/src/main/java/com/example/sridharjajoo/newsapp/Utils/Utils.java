@@ -37,6 +37,16 @@ public class Utils {
             }
         }
     }
+   
+   public static void showKeyboard(View view){
+        if(view != null){
+            InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (imm != null) {
+                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
+            }
+        }
+    }
+
 
     public static String formattedDate(String dateUTC) {
         DateFormat targetFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
