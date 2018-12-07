@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -51,6 +52,9 @@ public class HeadlineFragment extends Fragment implements Injectable {
     @BindView(R.id.custom_search)
     SearchView searchView;
 
+    @BindView(R.id.pullToRefresh)
+    SwipeRefreshLayout pullToRefresh;
+
     private List<Articles> articlesList;
     private HeadlineAdapter headlineAdapter;
     private View view;
@@ -85,6 +89,15 @@ public class HeadlineFragment extends Fragment implements Injectable {
             if (articlesList != null) {
                 setRecyclerView(articlesList);
             }
+        });
+
+        pullToRefresh.setOnRefreshListener(() -> {
+            if (!Utils.hasNetwork()) {
+                Toast.makeText(getActivity(), "Network not available!", Toast.LENGTH_SHORT).show();
+            }
+            headlineViewModel.getProgress().observe(getActivity(), progressBar::setVisibility);
+            loadNewsArticles();
+            pullToRefresh.setRefreshing(false);
         });
     }
 
