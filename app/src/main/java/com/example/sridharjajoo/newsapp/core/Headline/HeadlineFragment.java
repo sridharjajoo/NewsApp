@@ -81,6 +81,17 @@ public class HeadlineFragment extends Fragment implements Injectable {
         }
         headlineViewModel.getProgress().observe(this, progressBar::setVisibility);
         loadNewsArticles();
+
+        pullToRefresh.setOnRefreshListener(() -> {
+            if (!Utils.hasNetwork()) {
+                Toast.makeText(getActivity(), "Network not available!", Toast.LENGTH_SHORT).show();
+                pullToRefresh.setRefreshing(false);
+                return;
+            }
+            headlineViewModel.getProgress().observe(getActivity(), progressBar::setVisibility);
+            loadNewsArticles();
+            pullToRefresh.setRefreshing(false);
+        });
     }
 
     private void loadNewsArticles() {
@@ -91,14 +102,6 @@ public class HeadlineFragment extends Fragment implements Injectable {
             }
         });
 
-        pullToRefresh.setOnRefreshListener(() -> {
-            if (!Utils.hasNetwork()) {
-                Toast.makeText(getActivity(), "Network not available!", Toast.LENGTH_SHORT).show();
-            }
-            headlineViewModel.getProgress().observe(getActivity(), progressBar::setVisibility);
-            loadNewsArticles();
-            pullToRefresh.setRefreshing(false);
-        });
     }
 
     private void setRecyclerView(List<Articles> articlesList) {
