@@ -1,3 +1,6 @@
+## Gitter Channel
+[![Gitter](https://img.shields.io/badge/chat-on%20gitter-ff006f.svg)](https://gitter.im/news_app_kwoc)
+
 # NewsApp
 An app that fetches latest news and headlines. It also allows the users to favourite their news. The user also has the option to choose the source of news. They can also search for any particular trending keyword. The following libraries were used in this project.
 
@@ -18,6 +21,3 @@ Also Room was used for adding offline support.
 - Improving the offline support.
 - Adding more filters
 - Adding unit testing
-
-## Gitter Channel
-[![Gitter](https://img.shields.io/badge/chat-on%20gitter-ff006f.svg)](https://gitter.im/news_app_kwoc)
