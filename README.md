@@ -21,3 +21,8 @@ Also Room was used for adding offline support.
 - Improving the offline support.
 - Adding more filters
 - Adding unit testing
+
+## App Screenshots
+![](https://raw.githubusercontent.com/rob729/NewsApp/master/Screenshots/img_1.png)
+![](https://raw.githubusercontent.com/rob729/NewsApp/master/Screenshots/img2.png)
+![](https://raw.githubusercontent.com/rob729/NewsApp/master/Screenshots/img3.png)
