@@ -15,7 +15,9 @@ An app that fetches latest news and headlines. It also allows the users to favou
 
 Also Room was used for adding offline support.
 
+# Project Conventions
 ## MVVM Architecture 
+The project follows the MVVM design pattern.<br>
 MVVM(Model–view–viewmodel) is one of the architectural patterns which enhances separation of concerns, it allows separating the user interface logic from the business (or the back-end) logic.<br><br>
 MVVM has mainly the following layers:
 - Model<br>
