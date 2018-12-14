@@ -64,6 +64,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:textColor="@android:color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -71,6 +72,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:textColor="@android:color/black"
                 android:id="@+id/news_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -80,7 +82,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="right">
+                android:gravity="end">
+
+            <ImageButton
+                android:id="@+id/share_button"
+                android:layout_marginEnd="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_share_black_24dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"/>
 
             <CheckBox
                 android:id="@+id/favourite_icon"
