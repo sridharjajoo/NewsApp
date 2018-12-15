@@ -126,6 +126,12 @@ public class HeadlineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         });
         viewHolder.description.setText(currentItem.title);
         viewHolder.newsSource.setText(currentItem.source.name);
+        viewHolder.shareButton.setOnClickListener(view -> {
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("text/plain");
+            intent.putExtra(Intent.EXTRA_TEXT, currentItem.url);
+            context.startActivity(Intent.createChooser(intent, "Share News"));
+        });
         if (!currentItem.source.name.equals("Google News (India)"))
             viewHolder.newsTime.setText(Utils.formattedDate(currentItem.publishedAt));
 
