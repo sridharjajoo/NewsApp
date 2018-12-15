@@ -37,6 +37,9 @@ public class NewsDetailActivity extends AppCompatActivity {
     @BindView(R.id.btn_read_full)
     Button newsButton;
 
+    @BindView(R.id.tv_time)
+    TextView newsTime;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +53,7 @@ public class NewsDetailActivity extends AppCompatActivity {
             Glide.with(this).load(currentArticle.urlToImage).into(newsDetailsImage);
             newsSource.setText(currentArticle.source.name);
             newsTitle.setText(currentArticle.title);
+            newsTime.setText(Utils.formattedDate(currentArticle.publishedAt));
 
             newsButton.setOnClickListener(view -> {
                 String url = currentArticle.url;
