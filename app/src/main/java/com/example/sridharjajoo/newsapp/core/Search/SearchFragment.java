@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sridharjajoo.newsapp.R;
@@ -48,6 +49,9 @@ public class SearchFragment extends Fragment implements Injectable {
 
     @BindView(R.id.cutom_search_recycler)
     RecyclerView customSearchRecycler;
+
+    @BindView(R.id.no_search)
+    TextView noSearch;
 
     @Inject
     ViewModelProvider.Factory viewModelFactory;
@@ -133,6 +137,7 @@ public class SearchFragment extends Fragment implements Injectable {
     }
 
     private void handleSearch(String query) {
+        noSearch.setVisibility(View.INVISIBLE);
         searchViewModel.customSearch(query).observe(this, this::showResult);
     }
 
