@@ -26,6 +26,6 @@
             android:layout_height="wrap_content"
             android:text="@string/no_search_results"
             android:layout_gravity="center"
-            android:textSize="24sp"/>
+            android:textSize="@dimen/no_search"/>
     </FrameLayout>
 </LinearLayout>
