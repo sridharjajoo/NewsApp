@@ -1,15 +1,10 @@
-<resources>
-
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
-
-    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:windowBackground">@drawable/splash_layer</item>
-    </style>
-
-</resources>
+          <style name="AppTheme.fragment_search" parent="AppTheme">
+ 
+ <!-- This line changes the color of background in fragment_search. -->
+        <item name="android:textcolorPrimary">@color/#3F51B5</item>
+        <!-- This line changes the color of layout in fragment_search. -->
+        <item name="android:textcolorPrimaryDark">@color/#303F9F</item>
+        <!-- This line changes the color of text in fragment_search. -->
+        <item name="android:textcolorAccent">@color/#FF4081</item>
+        <!-- This line changes the color of search icon in fragment_search. -->
+        <item name="android:textwhite">@color/#FFFFFF</item>
