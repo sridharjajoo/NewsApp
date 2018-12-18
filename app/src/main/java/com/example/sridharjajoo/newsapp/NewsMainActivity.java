@@ -4,6 +4,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
@@ -17,13 +18,12 @@ import com.example.sridharjajoo.newsapp.core.Favourite.FavouriteFragment;
 import com.example.sridharjajoo.newsapp.core.Headline.HeadlineFragment;
 import com.example.sridharjajoo.newsapp.core.Search.SearchFragment;
 import com.example.sridharjajoo.newsapp.core.Setttings.SettingsActivity;
+import com.example.sridharjajoo.newsapp.databinding.ActivityNewsMainBinding;
 
 import java.util.Calendar;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
@@ -33,16 +33,13 @@ public class NewsMainActivity extends AppCompatActivity implements HasSupportFra
     @Inject
     DispatchingAndroidInjector<Fragment> dispatchingAndroidInjector;
 
-    @BindView(R.id.navigation)
-    BottomNavigationView navigationView;
-
     private ActionBar actionBar;
-
+    private ActivityNewsMainBinding binding;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_news_main);
-        ButterKnife.bind(this);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_news_main);
         actionBar = getSupportActionBar();
         showNavigation();
         setAlarm();
@@ -77,7 +74,7 @@ public class NewsMainActivity extends AppCompatActivity implements HasSupportFra
     }
 
     private void showNavigation() {
-        navigationView.setOnNavigationItemSelectedListener(item -> {
+        binding.navigation.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.navigation_headline:
                     HeadlineFragment navigationFragment = new HeadlineFragment();

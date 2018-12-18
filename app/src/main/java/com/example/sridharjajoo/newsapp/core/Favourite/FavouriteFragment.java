@@ -1,6 +1,7 @@
 package com.example.sridharjajoo.newsapp.core.Favourite;
 
 import android.arch.persistence.room.RoomDatabase;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -21,36 +22,30 @@ import com.example.sridharjajoo.newsapp.data.AppDatabase;
 import com.example.sridharjajoo.newsapp.data.Favourite.Favourite;
 import com.example.sridharjajoo.newsapp.data.Headline.Articles;
 import com.example.sridharjajoo.newsapp.data.Headline.Source;
+import com.example.sridharjajoo.newsapp.databinding.FragmentFavouriteBinding;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import dagger.Binds;
 
 public class FavouriteFragment extends Fragment {
 
-    @BindView(R.id.favourite_recycler_view)
-    RecyclerView recyclerView;
-
-    private View view;
     private AppDatabase db;
     private SearchAdapter searchAdapter;
     private List<Articles> listArticles = new ArrayList<>();
+    private FragmentFavouriteBinding binding;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_favourite, container, false);
-        return view;
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_favourite, container, false);
+        return binding.getRoot();
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        ButterKnife.bind(this, view);
         db = AppDatabase.getAppDatabase(getActivity());
         List<Favourite> favouriteList = db.favoriteDao().getFavourites();
         for (int i = 0; i < favouriteList.size(); i++) {
@@ -60,13 +55,13 @@ public class FavouriteFragment extends Fragment {
     }
 
     private void setRecyclerView(List<Articles> articlesList) {
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.favouriteRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         searchAdapter = new SearchAdapter(articlesList, getActivity(), db);
-        recyclerView.setAdapter(searchAdapter);
+        binding.favouriteRecyclerView.setAdapter(searchAdapter);
         loadArticles(articlesList);
         DividerItemDecoration itemDecorator = new DividerItemDecoration(Objects.requireNonNull(getContext()), DividerItemDecoration.VERTICAL);
         itemDecorator.setDrawable(Objects.requireNonNull(ContextCompat.getDrawable(Objects.requireNonNull(getActivity()), R.drawable.divider)));
-        recyclerView.addItemDecoration(itemDecorator);
+        binding.favouriteRecyclerView.addItemDecoration(itemDecorator);
     }
 
     private void loadArticles(List<Articles> articlesList) {
