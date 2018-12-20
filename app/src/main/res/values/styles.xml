@@ -12,8 +12,8 @@
         <item name="android:windowBackground">@drawable/splash_layer</item>
     </style>
     
-    <style name="AppTheme.fragment_search" parent="AppTheme">
-        <item name="android:textwhite">@color/#FFFFFF</item>
+    <style name="FragmentSearchTheme" parent="Theme.AppCompat.ActionBar">
+        <item name="colorPrimary">@color/white</item>
     </style>
 
 </resources>
