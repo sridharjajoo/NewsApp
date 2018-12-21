@@ -86,10 +86,7 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         });
         viewHolder.description.setText(currentItem.title);
         viewHolder.shareButton.setOnClickListener(view -> {
-            Intent intent = new Intent(Intent.ACTION_SEND);
-            intent.setType("text/plain");
-            intent.putExtra(Intent.EXTRA_TEXT, currentItem.url);
-            context.startActivity(Intent.createChooser(intent, "Share News"));
+            Utils.shareNews(context, currentItem.url);
         });
         viewHolder.newsSource.setText(currentItem.source.name);
         if (!currentItem.source.name.equals("Google News (India)"))
