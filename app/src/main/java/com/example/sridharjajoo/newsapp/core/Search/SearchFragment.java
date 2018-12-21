@@ -3,6 +3,7 @@ package com.example.sridharjajoo.newsapp.core.Search;
 import android.annotation.SuppressLint;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
+import android.databinding.DataBindingUtil;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -29,57 +30,44 @@ import com.example.sridharjajoo.newsapp.core.Headline.HeadlineAdapter;
 import com.example.sridharjajoo.newsapp.data.AppDatabase;
 import com.example.sridharjajoo.newsapp.data.Headline.Articles;
 import com.example.sridharjajoo.newsapp.data.Headline.HeadlineService;
+import com.example.sridharjajoo.newsapp.databinding.FragmentSearchBinding;
 import com.example.sridharjajoo.newsapp.di.Injectable;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
-
 public class SearchFragment extends Fragment implements Injectable {
 
     @Inject
     HeadlineService headlineService;
 
-    @BindView(R.id.progressBar)
-    ProgressBar progressBar;
-
-    @BindView(R.id.cutom_search_recycler)
-    RecyclerView customSearchRecycler;
-
-    @BindView(R.id.no_search)
-    TextView noSearch;
-
     @Inject
     ViewModelProvider.Factory viewModelFactory;
 
     private SearchAdapter searchAdapter;
-    private View view;
     private AppDatabase db;
     private SearchViewModel searchViewModel;
-
+    private FragmentSearchBinding binding;
+    
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_search, container, false);
-        ButterKnife.bind(this, view);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false);
         setHasOptionsMenu(true);
         db = AppDatabase.getAppDatabase(getActivity());
         searchViewModel = ViewModelProviders.of(this, viewModelFactory).get(SearchViewModel.class);
-        return view;
+        return binding.getRoot();
     }
 
     private void setRecyclerView(List<Articles> articlesList) {
-        customSearchRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.cutomSearchRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         searchAdapter = new SearchAdapter(articlesList, getActivity(), db);
-        customSearchRecycler.setAdapter(searchAdapter);
+        binding.cutomSearchRecycler.setAdapter(searchAdapter);
         loadArticles(articlesList);
         DividerItemDecoration itemDecorator = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
         itemDecorator.setDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.divider));
-        customSearchRecycler.addItemDecoration(itemDecorator);
+        binding.cutomSearchRecycler.addItemDecoration(itemDecorator);
     }
 
     private void loadArticles(List<Articles> articlesList) {
@@ -92,7 +80,7 @@ public class SearchFragment extends Fragment implements Injectable {
         if (!Utils.hasNetwork()) {
             Toast.makeText(getActivity(), "Network not available!", Toast.LENGTH_SHORT).show();
         }
-        searchViewModel.getProgress().observe(this, progressBar::setVisibility);
+        searchViewModel.getProgress().observe(this, binding.progressBar::setVisibility);
     }
 
     @Override
@@ -137,7 +125,7 @@ public class SearchFragment extends Fragment implements Injectable {
     }
 
     private void handleSearch(String query) {
-        noSearch.setVisibility(View.INVISIBLE);
+        binding.noSearch.setVisibility(View.INVISIBLE);
         searchViewModel.customSearch(query).observe(this, this::showResult);
     }
 
