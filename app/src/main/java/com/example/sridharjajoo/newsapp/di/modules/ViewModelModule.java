@@ -9,7 +9,6 @@ import com.example.sridharjajoo.newsapp.di.NewsViewModelFactory;
 
 import javax.inject.Singleton;
 
-import butterknife.BindView;
 import dagger.Binds;
 import dagger.Module;
 import dagger.multibindings.IntoMap;

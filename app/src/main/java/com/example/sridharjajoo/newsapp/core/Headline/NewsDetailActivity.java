@@ -1,5 +1,6 @@
 package com.example.sridharjajoo.newsapp.core.Headline;
 
+import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v7.app.AppCompatActivity;
@@ -15,27 +16,12 @@ import com.example.sridharjajoo.newsapp.R;
 import com.example.sridharjajoo.newsapp.Utils.Utils;
 import com.example.sridharjajoo.newsapp.data.AppDatabase;
 import com.example.sridharjajoo.newsapp.data.Headline.Articles;
+import com.example.sridharjajoo.newsapp.databinding.ActivityNewsDetailBinding;
 
-import butterknife.BindDimen;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class NewsDetailActivity extends AppCompatActivity {
 
-    @BindView(R.id.iv_news_image)
-    ImageView newsDetailsImage;
-
-    @BindView(R.id.tv_news_desc)
-    TextView newsDetails;
-
-    @BindView(R.id.tv_news_source)
-    TextView newsSource;
-
-    @BindView(R.id.tv_news_title)
-    TextView newsTitle;
-
-    @BindView(R.id.btn_read_full)
-    Button newsButton;
+    private ActivityNewsDetailBinding binding;
 
     @BindView(R.id.tv_time)
     TextView newsTime;
@@ -43,19 +29,17 @@ public class NewsDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_news_detail);
-        ButterKnife.bind(this);
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_news_detail);
         Bundle bundle = getIntent().getExtras();
         assert bundle != null;
         if (bundle.getString("title") != null) {
             Articles currentArticle = AppDatabase.getAppDatabase(this).newsDao().getArticleString(bundle.getString("title"));
-            newsDetails.setText(Utils.truncateExtra(currentArticle.content));
-            Glide.with(this).load(currentArticle.urlToImage).into(newsDetailsImage);
-            newsSource.setText(currentArticle.source.name);
-            newsTitle.setText(currentArticle.title);
-            newsTime.setText(Utils.formattedDate(currentArticle.publishedAt));
+            binding.tvNewsDesc.setText(Utils.truncateExtra(currentArticle.content));
+            Glide.with(this).load(currentArticle.urlToImage).into(binding.ivNewsImage);
+            binding.tvNewsSource.setText(currentArticle.source.name);
+            binding.tvNewsTitle.setText(currentArticle.title);
 
-            newsButton.setOnClickListener(view -> {
+            binding.btnReadFull.setOnClickListener(view -> {
                 String url = currentArticle.url;
                 CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
                 CustomTabsIntent customTabsIntent = builder.build();

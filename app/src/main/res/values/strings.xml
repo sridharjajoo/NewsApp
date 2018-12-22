@@ -11,4 +11,5 @@
     <string name="the_times_of_india">The Times of India</string>
     <string name="choose_the_news_sources">Choose the News Sources!</string>
     <string name="order_by_time">Order By Time?</string>
+    <string name="no_search_results">No Search Results</string>
 </resources>

@@ -3,6 +3,7 @@ package com.example.sridharjajoo.newsapp.core.Headline;
 import android.annotation.SuppressLint;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
+import android.databinding.DataBindingUtil;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -25,15 +26,13 @@ import com.example.sridharjajoo.newsapp.Utils.Utils;
 import com.example.sridharjajoo.newsapp.data.AppDatabase;
 import com.example.sridharjajoo.newsapp.data.Headline.Articles;
 import com.example.sridharjajoo.newsapp.data.Headline.HeadlineService;
+import com.example.sridharjajoo.newsapp.databinding.FragmentHeadlineBinding;
 import com.example.sridharjajoo.newsapp.di.Injectable;
 
 import java.util.List;
 import java.util.Objects;
 
 import javax.inject.Inject;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class HeadlineFragment extends Fragment implements Injectable {
 
@@ -43,33 +42,20 @@ public class HeadlineFragment extends Fragment implements Injectable {
     @Inject
     HeadlineService headlineService;
 
-    @BindView(R.id.progressBar)
-    ProgressBar progressBar;
-
-    @BindView(R.id.recycler_headline)
-    RecyclerView recyclerHeadline;
-
-    @BindView(R.id.custom_search)
-    SearchView searchView;
-
-    @BindView(R.id.pullToRefresh)
-    SwipeRefreshLayout pullToRefresh;
-
     private List<Articles> articlesList;
     private HeadlineAdapter headlineAdapter;
-    private View view;
     private AppDatabase db;
     protected LocationManager locationManager;
     private HeadlineViewModel headlineViewModel;
+    private FragmentHeadlineBinding binding;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_headline, container, false);
-        ButterKnife.bind(this, view);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_headline, container, false);
         db = AppDatabase.getAppDatabase(Objects.requireNonNull(getActivity()));
         headlineViewModel = ViewModelProviders.of(this, viewModelFactory).get(HeadlineViewModel.class);
-        return view;
+        return binding.getRoot();
     }
 
     @SuppressLint("CheckResult")
@@ -79,18 +65,18 @@ public class HeadlineFragment extends Fragment implements Injectable {
         if (!Utils.hasNetwork()) {
             Toast.makeText(getActivity(), "Network not available!", Toast.LENGTH_SHORT).show();
         }
-        headlineViewModel.getProgress().observe(this, progressBar::setVisibility);
+        headlineViewModel.getProgress().observe(this, binding.progressBar::setVisibility);
         loadNewsArticles();
 
-        pullToRefresh.setOnRefreshListener(() -> {
+        binding.pullToRefresh.setOnRefreshListener(() -> {
             if (!Utils.hasNetwork()) {
                 Toast.makeText(getActivity(), "Network not available!", Toast.LENGTH_SHORT).show();
-                pullToRefresh.setRefreshing(false);
+                binding.pullToRefresh.setRefreshing(false);
                 return;
             }
-            headlineViewModel.getProgress().observe(getActivity(), progressBar::setVisibility);
+            headlineViewModel.getProgress().observe(getActivity(), binding.progressBar::setVisibility);
             loadNewsArticles();
-            pullToRefresh.setRefreshing(false);
+            binding.pullToRefresh.setRefreshing(false);
         });
     }
 
@@ -105,13 +91,13 @@ public class HeadlineFragment extends Fragment implements Injectable {
     }
 
     private void setRecyclerView(List<Articles> articlesList) {
-        recyclerHeadline.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.recyclerHeadline.setLayoutManager(new LinearLayoutManager(getContext()));
         headlineAdapter = new HeadlineAdapter(articlesList, getActivity(), db);
-        recyclerHeadline.setAdapter(headlineAdapter);
+        binding.recyclerHeadline.setAdapter(headlineAdapter);
         loadArticles(articlesList);
         DividerItemDecoration itemDecorator = new DividerItemDecoration(Objects.requireNonNull(getContext()), DividerItemDecoration.VERTICAL);
         itemDecorator.setDrawable(Objects.requireNonNull(ContextCompat.getDrawable(Objects.requireNonNull(getActivity()), R.drawable.divider)));
-        recyclerHeadline.addItemDecoration(itemDecorator);
+        binding.recyclerHeadline.addItemDecoration(itemDecorator);
     }
 
     private void loadArticles(List<Articles> articlesList) {
