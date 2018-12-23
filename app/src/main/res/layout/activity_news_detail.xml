@@ -9,6 +9,12 @@
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            app:layout_constraintTop_toBottomOf="@+id/tv_news_title"
+            tools:text="@tools:sample/date/ddmmyy"
             android:paddingBottom="16dp"
             tools:context=".ui.news.DetailActivity">
 
@@ -20,7 +26,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/iv_news_image" />
-
             <ImageView
                 android:id="@+id/iv_news_image"
                 android:layout_width="match_parent"
@@ -64,10 +69,10 @@
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintTop_toBottomOf="@id/iv_news_image" />
-
             <TextView
                 android:id="@+id/tv_news_desc"
                 android:layout_width="0dp"
+                android:textColor="@android:color/black"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:padding="18dp"
@@ -80,6 +85,7 @@
             <TextView
                 android:id="@+id/tv_news_content"
                 android:layout_width="0dp"
+                android:textColor="@android:color/black"
                 android:padding="16dp"
                 android:layout_height="wrap_content"
                 android:alpha="0.6"
@@ -92,6 +98,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingEnd="16dp"
+                android:background="@drawable/read_more_button"
                 android:paddingStart="16dp"
                 android:text="@string/button_read_full_story"
                 android:textSize="16sp"
