@@ -72,6 +72,7 @@
             <TextView
                 android:id="@+id/tv_news_desc"
                 android:layout_width="0dp"
+                android:textColor="@android:color/black"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:padding="18dp"
@@ -84,6 +85,7 @@
             <TextView
                 android:id="@+id/tv_news_content"
                 android:layout_width="0dp"
+                android:textColor="@android:color/black"
                 android:padding="16dp"
                 android:layout_height="wrap_content"
                 android:alpha="0.6"
