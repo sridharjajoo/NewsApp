@@ -1,36 +1,13 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <android.support.constraint.ConstraintLayout
+    xmlns:tools="http://schemas.android.com/tools">
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="16dp"
-        tools:context=".ui.news.DetailActivity">
+        android:layout_height="match_parent">
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="#61ced7db"
-            app:layout_constraintBottom_toBottomOf="@id/tv_news_source"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_news_image" />
-
-        <ImageView
-            android:id="@+id/iv_news_image"
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:scaleType="fitXY"
-            app:layout_constraintDimensionRatio="h,16:9"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_time"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:paddingLeft="18dp"
@@ -38,81 +15,105 @@
             android:textStyle="bold"
             android:textColor="@android:color/black"
             app:layout_constraintTop_toBottomOf="@+id/tv_news_title"
-            tools:text="@tools:sample/date/ddmmyy" />
+            tools:text="@tools:sample/date/ddmmyy"
+            android:paddingBottom="16dp"
+            tools:context=".ui.news.DetailActivity">
 
-        <TextView
-            android:id="@+id/tv_news_source"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:paddingLeft="18dp"
-            android:paddingBottom="18dp"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/tv_time"
-            tools:text="The Washington Post" />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="#61ced7db"
+                app:layout_constraintBottom_toBottomOf="@id/tv_news_source"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_news_image" />
+            <ImageView
+                android:id="@+id/iv_news_image"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:scaleType="fitXY"
+                app:layout_constraintDimensionRatio="h,16:9"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_news_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:lineSpacingMultiplier="1.1"
-            android:paddingLeft="18dp"
-            android:paddingTop="18dp"
-            android:textColor="@android:color/black"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/iv_news_image" />
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:paddingLeft="18dp"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/tv_news_title"
+                tools:text="@tools:sample/date/ddmmyy" />
 
-        <TextView
-            android:id="@+id/tv_news_desc"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:padding="18dp"
-            android:alpha="0.6"
-            android:lineSpacingMultiplier="1.3"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/black"
-            app:layout_constraintTop_toBottomOf="@id/tv_news_source"
-            tools:layout_editor_absoluteY="365dp" />
+            <TextView
+                android:id="@+id/tv_news_source"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:paddingLeft="18dp"
+                android:paddingBottom="18dp"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/tv_time"
+                tools:text="The Washington Post" />
 
-        <TextView
-            android:id="@+id/tv_news_content"
-            android:layout_width="0dp"
-            android:padding="16dp"
-            android:layout_height="wrap_content"
-            android:alpha="0.6"
-            android:textStyle="bold"
-            android:textColor="@android:color/darker_gray"
-            android:lineSpacingMultiplier="1.3"
-            android:textSize="18sp"
-            app:layout_constraintTop_toBottomOf="@id/tv_news_desc" />
+            <TextView
+                android:id="@+id/tv_news_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:lineSpacingMultiplier="1.1"
+                android:paddingLeft="18dp"
+                android:paddingTop="18dp"
+                android:textColor="#000"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/iv_news_image" />
+            <TextView
+                android:id="@+id/tv_news_desc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:padding="18dp"
+                android:alpha="0.6"
+                android:lineSpacingMultiplier="1.3"
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@id/tv_news_source"
+                tools:layout_editor_absoluteY="365dp" />
 
-        <Button
-            android:id="@+id/btn_read_full"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingEnd="16dp"
-            android:textColor="@android:color/white"
-            android:paddingStart="16dp"
-            android:text="@string/button_read_full_story"
-            android:textSize="16sp"
-            android:background="@drawable/read_more_button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_news_content" />
+            <TextView
+                android:id="@+id/tv_news_content"
+                android:layout_width="0dp"
+                android:padding="16dp"
+                android:layout_height="wrap_content"
+                android:alpha="0.6"
+                android:lineSpacingMultiplier="1.3"
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@id/tv_news_desc" />
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="?actionBarItemBackground"
-            android:fitsSystemWindows="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </android.support.constraint.ConstraintLayout>
+            <Button
+                android:id="@+id/btn_read_full"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:text="@string/button_read_full_story"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_news_content" />
 
-</ScrollView>
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="?actionBarItemBackground"
+                android:fitsSystemWindows="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </android.support.constraint.ConstraintLayout>
+
+    </ScrollView>
+</layout>
