@@ -78,7 +78,8 @@ public class HeadlineServiceImpl implements HeadlineService {
         appDatabase = AppDatabase.getAppDatabase(context);
         List<Articles> articles = headlineResponse.articles;
         for (Articles newsArticle : articles) {
-            appDatabase.newsDao().insertAt(newsArticle);
+            if(appDatabase.newsDao().getArticleString(newsArticle.title) == null)
+                appDatabase.newsDao().insertAt(newsArticle);
         }
     }
 
