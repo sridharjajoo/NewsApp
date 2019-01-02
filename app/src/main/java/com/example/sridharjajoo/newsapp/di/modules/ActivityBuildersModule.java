@@ -1,6 +1,7 @@
 package com.example.sridharjajoo.newsapp.di.modules;
 
 import com.example.sridharjajoo.newsapp.NewsMainActivity;
+import com.example.sridharjajoo.newsapp.core.Category.CategoryFragment;
 import com.example.sridharjajoo.newsapp.core.Favourite.FavouriteFragment;
 import com.example.sridharjajoo.newsapp.core.Headline.HeadlineFragment;
 import com.example.sridharjajoo.newsapp.core.Headline.NewsDetailActivity;
@@ -27,6 +28,9 @@ public abstract class ActivityBuildersModule {
 
     @ContributesAndroidInjector
     abstract SearchFragment contributesSearchFragment();
+
+    @ContributesAndroidInjector
+    abstract CategoryFragment contributesCategoryFragment();
 
     @ContributesAndroidInjector
     abstract SettingsActivity contributesSettingsActivity();

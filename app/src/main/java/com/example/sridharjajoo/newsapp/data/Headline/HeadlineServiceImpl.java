@@ -58,6 +58,14 @@ public class HeadlineServiceImpl implements HeadlineService {
                 .observeOn(mainThread());
     }
 
+    @Override
+    public Observable<HeadlineResponse> getCustomHeadline(String category) {
+        return headlineApi.getHeadlinesFilteredByCategory(category, Utils.apiKey, "in")
+                .doOnNext(this::syncSaveHeadlines)
+                .subscribeOn(Schedulers.io())
+                .observeOn(mainThread());
+    }
+
     private void syncSaveCustom(CustomSearchResponse response) {
         appDatabase = AppDatabase.getAppDatabase(context);
         List<Articles> articles = response.articles;

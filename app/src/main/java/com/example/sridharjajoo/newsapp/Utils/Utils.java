@@ -1,5 +1,6 @@
 package com.example.sridharjajoo.newsapp.Utils;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.location.Address;

@@ -13,6 +13,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,6 +25,7 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.sridharjajoo.newsapp.NewsMainActivity;
 import com.example.sridharjajoo.newsapp.R;
 import com.example.sridharjajoo.newsapp.Utils.Utils;
 import com.example.sridharjajoo.newsapp.core.Headline.HeadlineAdapter;
@@ -49,7 +51,7 @@ public class SearchFragment extends Fragment implements Injectable {
     private AppDatabase db;
     private SearchViewModel searchViewModel;
     private FragmentSearchBinding binding;
-    
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -83,6 +85,7 @@ public class SearchFragment extends Fragment implements Injectable {
         searchViewModel.getProgress().observe(this, binding.progressBar::setVisibility);
     }
 
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
@@ -91,7 +94,7 @@ public class SearchFragment extends Fragment implements Injectable {
         Drawable drawable = ContextCompat.getDrawable(getActivity(), R.drawable.ic_search_black_24dp);
         drawable.setTint(ContextCompat.getColor(getActivity(), R.color.white));
         item.setIcon(drawable);
-        
+
         item.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
             @Override
             public boolean onMenuItemActionExpand(MenuItem item) {
@@ -129,10 +132,17 @@ public class SearchFragment extends Fragment implements Injectable {
         searchViewModel.customSearch(query).observe(this, this::showResult);
     }
 
+
+
     private void showResult(List<Articles> articles) {
         if (articles == null) {
             return;
         }
+        if(articles.size()==0)
+            binding.noSearch.setVisibility(View.VISIBLE);
         setRecyclerView(articles);
     }
+
+
+
 }

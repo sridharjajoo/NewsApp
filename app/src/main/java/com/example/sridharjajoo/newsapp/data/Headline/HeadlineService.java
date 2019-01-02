@@ -16,5 +16,8 @@ public interface HeadlineService {
     Observable<CustomSearchResponse> getCustomSearchReponse(String query);
 
     @NonNull
+    Observable<HeadlineResponse> getCustomHeadline(String category);
+
+    @NonNull
     Observable<SettingsResponse> getSources();
 }

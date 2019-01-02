@@ -22,7 +22,7 @@ android {
         targetCompatibility 1.8
         sourceCompatibility 1.8
     }
-    dataBinding{
+    dataBinding {
         enabled true
     }
 }
@@ -70,8 +70,8 @@ dependencies {
     testCompileOnly "org.projectlombok:lombok:1.16.18"
     annotationProcessor "org.projectlombok:lombok:1.16.18"
     testAnnotationProcessor "org.projectlombok:lombok:1.16.18"
-    
-     // Butterknife
+
+    // Butterknife
     implementation "com.jakewharton:butterknife:8.8.1"
     annotationProcessor "com.jakewharton:butterknife-compiler:8.8.1"
 

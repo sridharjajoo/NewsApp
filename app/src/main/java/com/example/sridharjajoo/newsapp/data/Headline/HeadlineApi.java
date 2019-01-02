@@ -20,10 +20,19 @@ public interface HeadlineApi {
             @Query(value = "sources") String sources,
             @Query(value = "apiKey") String apiKey);
 
-    @GET("everything")
+
+    @GET("top-headlines")
+    Observable<HeadlineResponse> getHeadlinesFilteredByCategory(
+            @Query(value = "category") String category,
+            @Query(value = "apiKey") String apiKey,
+            @Query(value = "country") String country);
+
+
+    @GET("top-headlines")
     Observable<CustomSearchResponse> getSearchResponse(@Query(value = "q") String query,
                                                        @Query(value = "apiKey") String apiKey);
     @GET("sources")
     Observable<SettingsResponse> getSourcesResponse(@Query(value = "apiKey") String apiKey,
                                                     @Query(value = "country") String country);
+
 }

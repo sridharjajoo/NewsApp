@@ -65,7 +65,6 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         configureViewHolder(viewHolder, currentItem);
     }
 
-
     private void configureViewHolder(SearchViewHolder viewHolder, Articles currentItem) {
         viewHolder.newsImage.setOnClickListener(view -> {
             Intent intent = new Intent(context, NewsDetailActivity.class);
@@ -86,8 +85,10 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         });
         viewHolder.description.setText(currentItem.title);
         viewHolder.newsSource.setText(currentItem.source.name);
-        if (!currentItem.source.name.equals("Google News (India)"))
+        if (!currentItem.source.name.equals("Google News (India)")) {
+            Log.e("TAG","error: "+currentItem.publishedAt);
             viewHolder.newsTime.setText(Utils.formattedDate(currentItem.publishedAt));
+        }
 
         viewHolder.cardView.setElevation(0);
 
