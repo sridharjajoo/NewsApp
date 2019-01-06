@@ -111,6 +111,7 @@ public class SearchFragment extends Fragment implements Injectable {
             public boolean onQueryTextSubmit(String query) {
                 if (Utils.hasNetwork()) {
                     handleSearch(query);
+                    Utils.hideKeyboard(getView());
                 } else {
                     Toast.makeText(getActivity(), "Network not available!", Toast.LENGTH_SHORT).show();
                 }
