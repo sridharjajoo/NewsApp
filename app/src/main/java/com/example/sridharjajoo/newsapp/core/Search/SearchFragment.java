@@ -102,7 +102,7 @@ public class SearchFragment extends Fragment implements Injectable {
 
             @Override
             public boolean onMenuItemActionCollapse(MenuItem item) {
-                return false;
+                return true;
             }
         });
 
