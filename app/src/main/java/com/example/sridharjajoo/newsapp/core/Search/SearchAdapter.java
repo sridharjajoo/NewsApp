@@ -85,7 +85,7 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         });
         viewHolder.description.setText(currentItem.title);
         viewHolder.newsSource.setText(currentItem.source.name);
-        if (!currentItem.source.name.equals("Google News (India)")) {
+        if (currentItem.publishedAt != null) {
             Log.e("TAG","error: "+currentItem.publishedAt);
             viewHolder.newsTime.setText(Utils.formattedDate(currentItem.publishedAt));
         }

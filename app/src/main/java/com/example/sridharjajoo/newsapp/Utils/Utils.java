@@ -48,7 +48,6 @@ public class Utils {
         }
     }
 
-
     public static String formattedDate(String dateUTC) {
         DateFormat targetFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         Date sd = null;
@@ -57,8 +56,11 @@ public class Utils {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        String formattedDate = targetFormat.format(sd);
-        return formattedDate;
+
+        if(sd != null)
+            return targetFormat.format(sd);
+        else
+            return " ";
     }
 
     public static String getCSVString(List<String> sourcesList) {
