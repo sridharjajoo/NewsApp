@@ -1,4 +1,4 @@
-## Gitter Channel
+[![Build Status](https://travis-ci.com/sridharjajoo/NewsApp.svg?branch=master)](https://travis-ci.com/sridharjajoo/NewsApp)
 [![Gitter](https://img.shields.io/badge/chat-on%20gitter-ff006f.svg)](https://gitter.im/news_app_kwoc)
 
 # NewsApp

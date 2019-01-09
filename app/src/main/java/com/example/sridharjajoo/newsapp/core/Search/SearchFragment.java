@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -104,16 +105,19 @@ public class SearchFragment extends Fragment implements Injectable {
 
             @Override
             public boolean onMenuItemActionCollapse(MenuItem item) {
-                return false;
+                return true;
             }
         });
 
         SearchView searchView = new SearchView(getActivity());
+        searchView.setBackgroundColor(Color.WHITE);
+        searchView.setIconified(false);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 if (Utils.hasNetwork()) {
                     handleSearch(query);
+                    Utils.hideKeyboard(getView());
                 } else {
                     Toast.makeText(getActivity(), "Network not available!", Toast.LENGTH_SHORT).show();
                 }

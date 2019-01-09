@@ -84,6 +84,9 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 db.favoriteDao().unfavouriteNews(currentItem.title);
         });
         viewHolder.description.setText(currentItem.title);
+        viewHolder.shareButton.setOnClickListener(view -> {
+            Utils.shareNews(context, currentItem.url);
+        });
         viewHolder.newsSource.setText(currentItem.source.name);
         if (currentItem.publishedAt != null) {
             Log.e("TAG","error: "+currentItem.publishedAt);
