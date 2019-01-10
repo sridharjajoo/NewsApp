@@ -35,7 +35,7 @@ public class NewsDetailActivity extends AppCompatActivity {
             Glide.with(this).load(currentArticle.urlToImage).into(binding.ivNewsImage);
             binding.tvNewsSource.setText(currentArticle.source.name);
             binding.tvNewsTitle.setText(currentArticle.title);
-
+            binding.tvTime.setText(Utils.formattedDate(currentArticle.publishedAt));
             binding.btnReadFull.setOnClickListener(view -> {
                 String url = currentArticle.url;
                 CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();

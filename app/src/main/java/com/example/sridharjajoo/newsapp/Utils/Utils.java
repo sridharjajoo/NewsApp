@@ -2,6 +2,7 @@ package com.example.sridharjajoo.newsapp.Utils;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.Address;
 import android.location.Geocoder;
@@ -46,6 +47,13 @@ public class Utils {
                 imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
             }
         }
+    }
+
+    public static void shareNews(Context context, String url){
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT, url);
+        context.startActivity(Intent.createChooser(intent, "Share News"));
     }
 
     public static String formattedDate(String dateUTC) {
