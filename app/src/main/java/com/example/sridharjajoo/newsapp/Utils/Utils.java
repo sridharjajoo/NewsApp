@@ -1,5 +1,6 @@
 package com.example.sridharjajoo.newsapp.Utils;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -55,7 +56,6 @@ public class Utils {
         context.startActivity(Intent.createChooser(intent, "Share News"));
     }
 
-
     public static String formattedDate(String dateUTC) {
         DateFormat targetFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         Date sd = null;
@@ -64,8 +64,11 @@ public class Utils {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        String formattedDate = targetFormat.format(sd);
-        return formattedDate;
+
+        if(sd != null)
+            return targetFormat.format(sd);
+        else
+            return " ";
     }
 
     public static String getCSVString(List<String> sourcesList) {

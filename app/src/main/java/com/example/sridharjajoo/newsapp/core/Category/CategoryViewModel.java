@@ -1,4 +1,4 @@
-package com.example.sridharjajoo.newsapp.core.Search;
+package com.example.sridharjajoo.newsapp.core.Category;
 
 import android.annotation.SuppressLint;
 import android.arch.lifecycle.LiveData;
@@ -14,26 +14,26 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class SearchViewModel extends ViewModel {
+public class CategoryViewModel extends ViewModel {
 
     private final HeadlineService headlineService;
     private MutableLiveData<Integer> progress = new MutableLiveData<>();
     private MutableLiveData<List<Articles>> articles = new MutableLiveData<>();
 
     @Inject
-    public SearchViewModel(HeadlineService headlineService) {
+    public CategoryViewModel(HeadlineService headlineService) {
         this.headlineService = headlineService;
     }
 
     @SuppressLint("CheckResult")
-    public LiveData<List<Articles>> customSearch(String query) {
-        headlineService.getCustomSearchReponse(query)
+    public LiveData<List<Articles>> headlineByCategory(String category) {
+        headlineService.getCustomHeadline(category)
                 .doOnSubscribe(disposable -> progress.setValue(View.VISIBLE))
                 .doFinally(() -> progress.setValue(View.GONE))
                 .subscribe(response -> {
-                    articles.setValue(response.articles);
-                }
-                , error -> Log.i("SearchViewModel.class", "customSearch: " + error));
+                            articles.setValue(response.articles);
+                        }
+                        , error -> Log.i("SearchViewModel.class", "HeadlineByCategory: " + error));
         return articles;
     }
 
