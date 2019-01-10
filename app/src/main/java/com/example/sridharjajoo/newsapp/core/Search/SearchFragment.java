@@ -131,12 +131,12 @@ public class SearchFragment extends Fragment implements Injectable {
     }
 
     private void showResult(List<Articles> articles) {
-        if ((articles == null)||(articles.size()==0)) {
+        if (articles == null || (articles.size()==0)) {
             searchAdapter.clearRecyclerView();
             binding.noSearch.setVisibility(View.VISIBLE);
-            return;
+        }else {
+            setRecyclerView(articles);
+            binding.noSearch.setVisibility(View.INVISIBLE);
         }
-        setRecyclerView(articles);
-        binding.noSearch.setVisibility(View.INVISIBLE);
     }
 }

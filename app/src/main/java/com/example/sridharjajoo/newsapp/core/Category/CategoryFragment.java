@@ -95,12 +95,14 @@ public class CategoryFragment extends Fragment implements Injectable {
     }
 
     private void showResult(List<Articles> articles) {
-        if (articles == null) {
-            return;
-        }
-        if(articles.size()==0)
+        if (articles == null || (articles.size()==0)) {
+            searchAdapter.clearRecyclerView();
             binding.noSearch.setVisibility(View.VISIBLE);
-        setRecyclerView(articles);
+        } else{
+            setRecyclerView(articles);
+            binding.noSearch.setVisibility(View.INVISIBLE);
+        }
+
     }
 
 }
