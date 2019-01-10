@@ -144,6 +144,11 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
     }
 
+    public void clearRecyclerView(){
+        articlesList.clear();
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getItemCount() {
         if (articles == null)

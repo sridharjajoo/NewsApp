@@ -12,23 +12,17 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.SearchView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.sridharjajoo.newsapp.NewsMainActivity;
 import com.example.sridharjajoo.newsapp.R;
 import com.example.sridharjajoo.newsapp.Utils.Utils;
-import com.example.sridharjajoo.newsapp.core.Headline.HeadlineAdapter;
 import com.example.sridharjajoo.newsapp.data.AppDatabase;
 import com.example.sridharjajoo.newsapp.data.Headline.Articles;
 import com.example.sridharjajoo.newsapp.data.Headline.HeadlineService;
@@ -132,17 +126,13 @@ public class SearchFragment extends Fragment implements Injectable {
         searchViewModel.customSearch(query).observe(this, this::showResult);
     }
 
-
-
     private void showResult(List<Articles> articles) {
-        if (articles == null) {
+        if ((articles == null)||(articles.size()==0)) {
+            searchAdapter.clearRecyclerView();
+            binding.noSearch.setVisibility(View.VISIBLE);
             return;
         }
-        if(articles.size()==0)
-            binding.noSearch.setVisibility(View.VISIBLE);
         setRecyclerView(articles);
+        binding.noSearch.setVisibility(View.INVISIBLE);
     }
-
-
-
 }
