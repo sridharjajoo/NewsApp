@@ -39,3 +39,13 @@ Finally, the view role in this pattern is to observe a ViewModel observable to g
 ![](https://raw.githubusercontent.com/rob729/NewsApp/master/Screenshots/img_1.png)
 ![](https://raw.githubusercontent.com/rob729/NewsApp/master/Screenshots/img2.png)
 ![](https://raw.githubusercontent.com/rob729/NewsApp/master/Screenshots/img3.png)
+
+## License
+
+>(c) 2019 Sridhar Jajoo
+
+>This is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. 
+
+>This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. 
+
+>You should have received a copy of the GNU General Public License along with this app. If not, see <https://www.gnu.org/licenses/>.
