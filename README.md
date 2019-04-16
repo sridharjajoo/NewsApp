@@ -15,6 +15,12 @@ An app that fetches latest news and headlines. It also allows the users to favou
 
 Also Room was used for adding offline support.
 
+# Steps of Installation
+1. Fork the github repo.
+2. Install the repo locally.
+3. Generate your own API key from newsapi.org and replace it in the Utils.java class.
+4. Run the app.
+
 # Project Conventions
 ## MVVM Architecture 
 The project follows the MVVM design pattern.<br>
