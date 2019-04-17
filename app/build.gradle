@@ -13,9 +13,13 @@ android {
         multiDexEnabled true
     }
     buildTypes {
+        debug {
+            buildConfigField 'String', "API_KEY", MY_API_KEY
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', "API_KEY", MY_API_KEY
         }
     }
     compileOptions {

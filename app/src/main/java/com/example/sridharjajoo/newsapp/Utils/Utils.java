@@ -14,6 +14,7 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import com.example.sridharjajoo.newsapp.BuildConfig;
 import com.example.sridharjajoo.newsapp.NewsMainApplication;
 
 import java.io.IOException;
@@ -28,7 +29,7 @@ import javax.inject.Inject;
 
 public class Utils {
 
-   public static String apiKey = "aaefc3faa210424e9978fa75586d9580";
+   public static String apiKey = BuildConfig.API_KEY;
 
     public static void hideKeyboard(View view) {
         if (view != null) {
