@@ -40,19 +40,10 @@ public class FavouriteFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_favourite, container, false);
+        getSavedNews();
         return binding.getRoot();
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        db = AppDatabase.getAppDatabase(getActivity());
-        List<Favourite> favouriteList = db.favoriteDao().getFavourites();
-        for (int i = 0; i < favouriteList.size(); i++) {
-            listArticles.add(favouriteList.get(i).articles);
-        }
-        setRecyclerView(listArticles);
-    }
 
     private void setRecyclerView(List<Articles> articlesList) {
         binding.favouriteRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -67,4 +58,14 @@ public class FavouriteFragment extends Fragment {
     private void loadArticles(List<Articles> articlesList) {
         searchAdapter.setArticlesList(articlesList);
     }
+
+    private void getSavedNews(){
+        db = AppDatabase.getAppDatabase(getActivity());
+        List<Favourite> favouriteList = db.favoriteDao().getFavourites();
+        for (int i = 0; i < favouriteList.size(); i++) {
+            listArticles.add(favouriteList.get(i).articles);
+        }
+        setRecyclerView(listArticles);
+    }
+
 }
