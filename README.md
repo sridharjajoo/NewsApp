@@ -18,8 +18,13 @@ Also Room was used for adding offline support.
 # Steps of Installation
 1. Fork the github repo.
 2. Install the repo locally.
-3. Generate your own API key from newsapi.org and replace it in the Utils.java class.
-4. Run the app.
+3. Generate your own API key from newsapi.org.
+4. In your system level .gradle file create a file with the name gradle.properties and add the api key to it in the following manner : 
+
+MY_API_KEY = "you_api_key"
+
+5. Save the above file.
+6. Run the app.
 
 # Project Conventions
 ## MVVM Architecture 
