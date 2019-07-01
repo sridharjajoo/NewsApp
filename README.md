@@ -1,6 +1,6 @@
 [![Gitter](https://img.shields.io/badge/chat-on%20gitter-ff006f.svg)](https://gitter.im/news_app_kwoc)
 
-# NewsApp
+# NEWSAPP
 An app that fetches latest news and headlines. It also allows the users to favourite their news. The user also has the option to choose the source of news. They can also search for any particular trending keyword. The following libraries were used in this project.
 
 - [RxJava 2](https://github.com/ReactiveX/RxJava)
