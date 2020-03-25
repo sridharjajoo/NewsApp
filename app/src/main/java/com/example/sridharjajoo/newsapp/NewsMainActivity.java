@@ -47,7 +47,7 @@ public class NewsMainActivity extends AppCompatActivity implements HasSupportFra
 
     private ActionBar actionBar;
     private ActivityNewsMainBinding binding;
-    private int TOTALCATEGORY = 3;
+    private int TOTALCATEGORY = 7;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -188,6 +188,14 @@ public class NewsMainActivity extends AppCompatActivity implements HasSupportFra
                     return "Sports";
                 case 2:
                     return "Entertainment";
+                case 3:
+                    return "Technology";
+                case 4:
+                    return "Business";
+                case 5:
+                    return "General";
+                case 6:
+                    return "Health";
             }
             return " ";
 
@@ -205,6 +213,14 @@ public class NewsMainActivity extends AppCompatActivity implements HasSupportFra
                 case 1:
                     return categoryFragment;
                 case 2:
+                    return categoryFragment;
+                case 3:
+                    return categoryFragment;
+                case 4:
+                    return categoryFragment;
+                case 5:
+                    return categoryFragment;
+                case 6:
                     return categoryFragment;
             }
             return null;

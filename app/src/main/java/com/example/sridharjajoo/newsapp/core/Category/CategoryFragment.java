@@ -43,7 +43,7 @@ public class CategoryFragment extends Fragment implements Injectable {
     private SearchAdapter searchAdapter;
     private AppDatabase db;
     private String category;
-    private int selectedCategory=0;
+    private int selectedCategory = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -90,12 +90,16 @@ public class CategoryFragment extends Fragment implements Injectable {
             case 0 : return  "science";
             case 1 : return  "sports";
             case 2 : return  "entertainment";
+            case 3 : return  "technology";
+            case 4 : return  "business";
+            case 5 : return  "general";
+            case 6 : return  "health";
             default: return  "science";
         }
     }
 
     private void showResult(List<Articles> articles) {
-        if (articles == null || (articles.size()==0)) {
+        if (articles == null || (articles.size() == 0)) {
             searchAdapter.clearRecyclerView();
             binding.noSearch.setVisibility(View.VISIBLE);
         } else{
