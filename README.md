@@ -39,6 +39,7 @@ Finally, the view role in this pattern is to observe a ViewModel observable to g
 ![](https://raw.githubusercontent.com/rob729/NewsApp/master/Screenshots/img_1.png)
 ![](https://raw.githubusercontent.com/rob729/NewsApp/master/Screenshots/img2.png)
 ![](https://raw.githubusercontent.com/rob729/NewsApp/master/Screenshots/img3.png)
+![](https://raw.githubusercontent.com/rob729/NewsApp/master/Screenshots/img4.jpg)
 
 ## License
 
